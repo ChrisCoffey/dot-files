@@ -22,6 +22,8 @@ alias play="~/3rdParty/play-2.2.3/play"
 alias activator="~/3rdParty/activator-1.2.3-minimal/activator"
 alias clearsbt='export SBT_OPTS=""'
 alias sparkNotebook='(~/bin/spark-notebook-0.6.1-scala-2.10.4-spark-1.5.0-hadoop-2.2.0/bin/spark-notebook)'
+alias sghci="stack ghci"
+alias sghc="stack ghc"
 
 #############
 #
@@ -45,8 +47,12 @@ function gwl(){
     Command+="| xargs -I % sh -c 'git branch -D %; git push origin --delete %;'"
   fi;
  
-  eval "$Command"
+  eval "$Command && git fetch --prune origin"
 }
+
+if [ -f `brew --prefix`/etc/bash_completion ]; then
+        . `brew --prefix`/etc/bash_completion
+    fi
 
 alias gc="git checkout"
 alias gcm="git checkout master"
@@ -66,11 +72,12 @@ export SBT_OPTS="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,addres
 
 export PATH=$PATH:$SCALA_HOME:/Users/ccoffey/bin
 export PATH=$PATH:/usr/local/bin:$SCALA_HOME/bin:/Users/ccoffey/bin/s3cmd-1.5.0-rc1
-export PATH="$HOME/Library/Haskell/bin:$PATH"
 export PATH=~/anaconda/bin:$PATH
 export PATH=~/bin/spark-1.2.1-bin-hadoop2.4/bin:$PATH
 export PATH=~/3rdParty/phantomjs/bin/:$PATH
 
+export LDFLAGS="-L/usr/local/opt/llvm/lib"
+export CPPFLAGS="-I/usr/local/opt/llvm/include"
 ########################
 ### Boot2Docker Settings
 ########################
@@ -82,4 +89,6 @@ export DOCKER_TLS_VERIFY=1
 ########################
 
 source ~/bin/bootScripts/export.awsKeys.sh
+source ~/bin/bootScripts/mongo.sh
 source ~/bin/bootScripts/roundtown.sh
+source ~/bin/bootScripts/proxy.sh
