@@ -1,0 +1,5 @@
+#!/bin/bash
+
+((!$#)) && echo "no branch! You should add one" && exit 1
+
+git checkout master && git checkout -b c/$1
