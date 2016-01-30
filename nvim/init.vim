@@ -1,4 +1,5 @@
 
+" Plug Init ----- {{{
 call plug#begin()
 
 
@@ -41,7 +42,9 @@ Plug 'python-mode'
 Plug 'jshint/jshint'
 
 call plug#end()
+" }}}
 
+" Basic nav and setup ------- {{{
 let mapleader = "-"
 let maplocalleader= "\\"
 filetype plugin indent on 
@@ -61,11 +64,17 @@ set statusline+=\ [%4L]
 set statusline+=\ -\ 
 set statusline+=FileType:
 set statusline+=%y
+" }}}
 
-" Meta mappings
+" Meta mappings ------- {{{
 nnoremap <leader>sv :source $MYVIMRC<cr>
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
-"Editing mappings
+nnoremap <leader>wl <c-w>l
+nnoremap <leader>wh <c-w>h
+nnoremap <leader>wj <c-w>j
+nnoremap <leader>wk <c-w>k
+" }}}
+"Editing mapping ------- {{{
 nnoremap L $l
 nnoremap H ^h
 inoremap jk <esc>
@@ -74,17 +83,20 @@ nnoremap <esc> :noh<return><esc>
 nnoremap <c-u> viwU
 onoremap p i(
 onoremap b i{
-" Plugin mappings
+" }}}
+" Plugin mappings ------- {{{
 nnoremap <leader><F7> :TagbarToggle<CR>
 nnoremap <leader><F8> :EnType<CR>
 nnoremap <leader><F9> :EnDeclaration<CR>
+" }}}
 
-"Syntastic setup
+"Syntastic setup ------- {{{
 set statusline+=%{SyntasticStatuslineFlag()}
 let g:syntastic_javascript_checkers = ['jshint']
 let EnErrorStyle='Underlined'
+" }}}
 
-" Rainbow Parens
+" Rainbow Parens ------- {{{
 augroup parensGrp
     autocmd!
     au VimEnter * RainbowParenthesesToggle
@@ -92,8 +104,9 @@ augroup parensGrp
     au Syntax * RainbowParenthesesLoadSquare
     au Syntax * RainbowParenthesesLoadBraces
 augroup END
+" }}}
 
-" Haskell Setup
+" Haskell Setup ------- {{{
 augroup haskellGrp
     autocmd!
     au FileType haskell nnoremap <buffer> <F1> :HdevtoolsType<CR>
@@ -101,15 +114,26 @@ augroup haskellGrp
 augroup END
 let g:haddock_browser="open"
 let g:haddock_browser_callformat="%s %s"
+" }}}
 
-" Javascript Setup
+" Javascript Setup ------- {{{
 augroup javascriptGrp
     autocmd!
     au FileType javascript nnoremap <buffer> :<c-u>normal! F(i function <esc> f)a{<cr><cr>}<esc>ka<tab><cr>
 augroup END
+" }}}
 
-" Markdown Setup
+" Markdown Setup ------- {{{
 augroup markdownGrp
     autocmd!
     au FileType markdown :spell nowrap
 augroup END
+" }}}
+
+" Vimscript Setup --------- {{{
+augroup vimscriptGrp
+    autocmd!
+    autocmd FileType vim setlocal foldmethod=marker
+augroup END
+
+" }}}
