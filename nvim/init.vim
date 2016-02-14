@@ -9,11 +9,13 @@ Plug 'majutsushi/tagbar'
 Plug 'gregsexton/MatchTag'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-colors-solarized'
-Plug 'vim-fireplace'
 Plug 'syntastic'
 Plug 'Shougo/vimproc.vim'
 Plug 'jceb/vim-orgmode'
 Plug 'kien/ctrlp.vim'
+Plug 'tpope/vim-speeddating'
+Plug 'tpope/vim-speeddating'
+Plug 'scrooloose/nerdtree'
 
 " Haskell
 Plug 'lukerandall/haskellmode-vim'
@@ -28,7 +30,8 @@ Plug 'derekwyatt/vim-sbt'
 Plug 'ensime/ensime-vim'
 
 " Clojure
-Plug 'vim-clojure-static'
+Plug 'vim-fireplace.vim'
+Plug 'vim-clojure-static.vim'
 Plug 'rainbow_parentheses.vim'
 
 " Swift
@@ -36,10 +39,10 @@ Plug 'swift.vim'
 Plug 'cocoa.vim'
 
 " Python
-Plug 'python-mode'
+Plug 'python-mode.vim'
 
 " Javascript
-Plug 'jshint/jshint'
+Plug 'wookiehangover/jshint.vim'
 
 call plug#end()
 " }}}
@@ -52,7 +55,7 @@ syntax on
 
 set spelllang=en_us
 set number numberwidth=2
-set tags=tags;/
+set tags=./.tags,.tags,./tags,tags
 set tabstop=8 softtabstop=4 expandtab shiftwidth=4 smarttab shiftround
 set nowrap
 
@@ -69,21 +72,32 @@ set statusline+=%y
 " Meta mappings ------- {{{
 nnoremap <leader>sv :source $MYVIMRC<cr>
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>org :Ex **/*.org <cr>
 nnoremap <leader>wl <c-w>l
 nnoremap <leader>wh <c-w>h
 nnoremap <leader>wj <c-w>j
 nnoremap <leader>wk <c-w>k
 " }}}
 "Editing mapping ------- {{{
-nnoremap L $l
-nnoremap H ^h
 inoremap jk <esc>
 inoremap <esc> <nop>
+inoremap <localleader>dg <c-k>
+
+nnoremap L $l
+nnoremap H ^h
 nnoremap <esc> :noh<return><esc>
 nnoremap <c-u> viwU
+
 onoremap p i(
 onoremap b i{
+
 " }}}
+
+"Search mapping ---------{{{
+" nnoremap <leader>gw :execute "grep -R " . shellescape(expand("<cword>")) . " ."<cr>
+" nnoremap <leader>gW :execute "grep -R " . shellescape(expand("<cWORD>")) . " ."<cr>
+"}}}
+
 " Plugin mappings ------- {{{
 nnoremap <leader><F7> :TagbarToggle<CR>
 nnoremap <leader><F8> :EnType<CR>
@@ -93,7 +107,13 @@ nnoremap <leader><F9> :EnDeclaration<CR>
 "Syntastic setup ------- {{{
 set statusline+=%{SyntasticStatuslineFlag()}
 let g:syntastic_javascript_checkers = ['jshint']
-let EnErrorStyle='Underlined'
+" }}}
+
+" Ensime --------- {{{
+augroup scalaGrp
+    autocmd!
+    au FileType scala nnoremap <buffer> <localleader>p :<c-u>normal! ^iprivate <esc><cr>
+augroup END
 " }}}
 
 " Rainbow Parens ------- {{{
@@ -111,15 +131,18 @@ augroup haskellGrp
     autocmd!
     au FileType haskell nnoremap <buffer> <F1> :HdevtoolsType<CR>
     au FileType haskell nnoremap <buffer> <silent> <F2> :HdevtoolsClear<CR>
+    autocmd FileType haskell nnoremap <buffer> <leader>cc :<c-u>normal! ^i--<esc><cr>
 augroup END
 let g:haddock_browser="open"
 let g:haddock_browser_callformat="%s %s"
+
 " }}}
 
 " Javascript Setup ------- {{{
 augroup javascriptGrp
     autocmd!
-    au FileType javascript nnoremap <buffer> :<c-u>normal! F(i function <esc> f)a{<cr><cr>}<esc>ka<tab><cr>
+    au FileType javascript nnoremap <buffer> <leader>=>  :<c-u>normal! F(i function <esc> f)a{<cr><cr>}<esc>ka<tab><cr>
+    au FileType javascript nnoremap <buffer> <localleader>cc :<c-u>normal! ^i//<esc><cr>
 augroup END
 " }}}
 
