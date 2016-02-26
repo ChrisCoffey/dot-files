@@ -9,17 +9,15 @@ Plug 'majutsushi/tagbar'
 Plug 'gregsexton/MatchTag'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-colors-solarized'
-Plug 'syntastic'
+Plug 'scrooloose/syntastic'
 Plug 'Shougo/vimproc.vim'
 Plug 'jceb/vim-orgmode'
 Plug 'kien/ctrlp.vim'
-Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-speeddating'
 Plug 'scrooloose/nerdtree'
 
 " Haskell
 Plug 'lukerandall/haskellmode-vim'
-Plug 'eagletmt/ghcmod-vim'
 Plug 'bitc/vim-hdevtools'
 
 " Elm
@@ -43,6 +41,8 @@ Plug 'python-mode.vim'
 
 " Javascript
 Plug 'wookiehangover/jshint.vim'
+Plug 'Quramy/tsuquyomi'
+Plug 'leafgarland/typescript-vim'
 
 call plug#end()
 " }}}
@@ -78,6 +78,7 @@ nnoremap <leader>wh <c-w>h
 nnoremap <leader>wj <c-w>j
 nnoremap <leader>wk <c-w>k
 " }}}
+
 "Editing mapping ------- {{{
 inoremap jk <esc>
 inoremap <esc> <nop>
@@ -94,12 +95,10 @@ onoremap b i{
 " }}}
 
 "Search mapping ---------{{{
-" nnoremap <leader>gw :execute "grep -R " . shellescape(expand("<cword>")) . " ."<cr>
-" nnoremap <leader>gW :execute "grep -R " . shellescape(expand("<cWORD>")) . " ."<cr>
+  nnoremap <localleader>t :NERDTreeToggle<cr>
 "}}}
 
 " Plugin mappings ------- {{{
-nnoremap <leader><F7> :TagbarToggle<CR>
 nnoremap <leader><F8> :EnType<CR>
 nnoremap <leader><F9> :EnDeclaration<CR>
 " }}}
@@ -113,6 +112,8 @@ let g:syntastic_javascript_checkers = ['jshint']
 augroup scalaGrp
     autocmd!
     au FileType scala nnoremap <buffer> <localleader>p :<c-u>normal! ^iprivate <esc><cr>
+    au FileType scala setlocal foldmethod=syntax
+    au FileType scala normal zR
 augroup END
 " }}}
 
@@ -143,6 +144,11 @@ augroup javascriptGrp
     autocmd!
     au FileType javascript nnoremap <buffer> <leader>=>  :<c-u>normal! F(i function <esc> f)a{<cr><cr>}<esc>ka<tab><cr>
     au FileType javascript nnoremap <buffer> <localleader>cc :<c-u>normal! ^i//<esc><cr>
+augroup END
+
+augroup typescriptGrp
+    autocmd!
+    autocmd FileType typescript nmap <buffer> <localleader>r :<C-u>echo tsuquyomi#hint()<CR>
 augroup END
 " }}}
 
