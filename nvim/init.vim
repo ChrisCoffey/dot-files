@@ -8,7 +8,6 @@ Plug 'VundleVim/Vundle.vim'
 Plug 'majutsushi/tagbar'
 Plug 'gregsexton/MatchTag'
 Plug 'tpope/vim-fugitive'
-Plug 'vim-colors-solarized'
 Plug 'scrooloose/syntastic'
 Plug 'Shougo/vimproc.vim'
 Plug 'jceb/vim-orgmode'
@@ -28,16 +27,13 @@ Plug 'derekwyatt/vim-sbt'
 Plug 'ensime/ensime-vim'
 
 " Clojure
-Plug 'vim-fireplace.vim'
-Plug 'vim-clojure-static.vim'
 Plug 'rainbow_parentheses.vim'
 
 " Swift
-Plug 'swift.vim'
 Plug 'cocoa.vim'
 
 " Python
-Plug 'python-mode.vim'
+Plug 'klen/python-mode'
 
 " Javascript
 Plug 'wookiehangover/jshint.vim'
@@ -67,6 +63,7 @@ set statusline+=\ [%4L]
 set statusline+=\ -\ 
 set statusline+=FileType:
 set statusline+=%y
+set statusline+=\ col:\ %c,
 " }}}
 
 " Meta mappings ------- {{{
@@ -99,8 +96,6 @@ onoremap b i{
 "}}}
 
 " Plugin mappings ------- {{{
-nnoremap <leader><F8> :EnType<CR>
-nnoremap <leader><F9> :EnDeclaration<CR>
 " }}}
 
 "Syntastic setup ------- {{{
@@ -114,6 +109,8 @@ augroup scalaGrp
     au FileType scala nnoremap <buffer> <localleader>p :<c-u>normal! ^iprivate <esc><cr>
     au FileType scala setlocal foldmethod=syntax
     au FileType scala normal zR
+    nnoremap <leader><F8> :EnType<CR>
+    nnoremap <leader><F9> :EnDeclaration<CR>
 augroup END
 " }}}
 
