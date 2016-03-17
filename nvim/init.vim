@@ -14,6 +14,7 @@ Plug 'jceb/vim-orgmode'
 Plug 'kien/ctrlp.vim'
 Plug 'tpope/vim-speeddating'
 Plug 'scrooloose/nerdtree'
+Plug 'mtth/scratch.vim'
 
 " Haskell
 Plug 'lukerandall/haskellmode-vim'
@@ -24,7 +25,7 @@ Plug 'elm.vim'
 
 " Scala
 Plug 'derekwyatt/vim-sbt'
-Plug 'ensime/ensime-vim'
+Plug 'ChrisCoffey/ensime-vim'
 
 " Clojure
 Plug 'rainbow_parentheses.vim'
@@ -88,6 +89,7 @@ nnoremap <c-u> viwU
 
 onoremap p i(
 onoremap b i{
+onoremap sb i[
 
 " }}}
 
