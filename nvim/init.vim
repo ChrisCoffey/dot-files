@@ -94,7 +94,7 @@ onoremap sb i[
 " }}}
 
 "Search mapping ---------{{{
-  nnoremap <localleader>t :NERDTreeToggle<cr>
+  nnoremap <leader>t :NERDTreeToggle<cr>
 "}}}
 
 " Plugin mappings ------- {{{
@@ -111,8 +111,11 @@ augroup scalaGrp
     au FileType scala nnoremap <buffer> <localleader>p :<c-u>normal! ^iprivate <esc><cr>
     au FileType scala setlocal foldmethod=syntax
     au FileType scala normal zR
-    nnoremap <leader><F8> :EnType<CR>
-    nnoremap <leader><F9> :EnDeclaration<CR>
+    au FileType scala nnoremap <buffer> <localleader>cc :<c-u>normal! ^i//<esc><cr>
+    nnoremap <localleader>t :EnType<CR>
+    nnoremap <localleader>d :EnDeclaration<CR>
+    nnoremap <localleader>dh :EnDeclarationSplit<CR>
+    nnoremap <localleader>dv :EnDeclarationSplit v<CR>
 augroup END
 " }}}
 
@@ -148,6 +151,7 @@ augroup END
 augroup typescriptGrp
     autocmd!
     autocmd FileType typescript nmap <buffer> <localleader>r :<C-u>echo tsuquyomi#hint()<CR>
+    autocmd FileType typescript nnoremap <localleader>c :exec "!tsc"<cr>:exec "redraw!"<cr>
 augroup END
 " }}}
 

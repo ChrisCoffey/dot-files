@@ -26,42 +26,6 @@ alias sparkNotebook='(~/bin/spark-notebook-0.6.1-scala-2.10.4-spark-1.5.0-hadoop
 alias sghci="stack ghci"
 alias sghc="stack ghc"
 
-#############
-#
-# Git Stuff
-#
-##############
-
-# https://github.com/mfitzp/martinfitzpatrick.name/blob/master/content/computing/add-git-branch-name-to-terminal-prompt-mac.md
-parse_git_branch() {
-
-      git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
-
-    }
-
-export PS1="\u@\h \W\[\033[32m\]\$(parse_git_branch)\[\033[00m\] $ "
-
-function gwl(){
-  Command="git branch --merged master | grep -v master " 
-  
-  if [ "$1" == "d" ]; then
-    Command+="| xargs -I % sh -c 'git branch -D %; git push origin --delete %;'"
-  fi;
- 
-  eval "$Command && git fetch --prune origin"
-}
-
-if [ -f `brew --prefix`/etc/bash_completion ]; then
-        . `brew --prefix`/etc/bash_completion
-    fi
-
-alias gc="git checkout"
-alias gcm="git checkout master"
-alias gcd="git checkout develop"
-alias gp="git pull"
-
-##############
-
 
 alias startpsql=' postgres -D /Users/ccoffey/bin/pgData/'
 
@@ -71,8 +35,12 @@ export JAVA_HOME=$(/usr/libexec/java_home -v 1.8.0_05)
 export JAVA_OPTIONS="-Xms64m -Xmx4G -Xss2m -XX:MaxPermSize=2G"
 export SBT_OPTS="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=9999"
 
-export PATH=$PATH:$SCALA_HOME:/Users/ccoffey/bin
-export PATH=$PATH:/usr/local/bin:$SCALA_HOME/bin:/Users/ccoffey/bin/s3cmd-1.5.0-rc1
+export PATH=$PATH:$SCALA_HOME
+export PATH=$PATH:$SCALA_HOME/bin
+export PATH=$PATH:/Users/ccoffey/bin
+export PATH=$PATH:/Users/ccoffey/bin/bootScripts/git
+export PATH=$PATH:/usr/local/bin
+export PATH=$PATH:/Users/ccoffey/bin/s3cmd-1.5.0-rc1
 export PATH=~/anaconda/bin:$PATH
 export PATH=~/bin/spark-1.2.1-bin-hadoop2.4/bin:$PATH
 export PATH=~/3rdParty/phantomjs/bin/:$PATH
@@ -89,6 +57,7 @@ export DOCKER_TLS_VERIFY=1
 
 ########################
 
+source ~/bin/bootScripts/git/gitFuncs.sh
 source ~/bin/bootScripts/export.awsKeys.sh
 source ~/bin/bootScripts/mongo.sh
 source ~/bin/bootScripts/roundtown.sh
