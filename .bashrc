@@ -25,6 +25,10 @@ alias clearsbt='export SBT_OPTS=""'
 alias sparkNotebook='(~/bin/spark-notebook-0.6.1-scala-2.10.4-spark-1.5.0-hadoop-2.2.0/bin/spark-notebook)'
 alias sghci="stack ghci"
 alias sghc="stack ghc"
+alias shapeless="~/bin/bootScripts/shapeless.sh"
+alias fs2="~/bin/bootScripts/fs2.sh"
+alias szs="~/bin/bootScripts/scalaZs"
+alias genny="/Applications/Genymotion\ Shell.app/Contents/MacOS/gennyshell"
 
 
 alias startpsql=' postgres -D /Users/ccoffey/bin/pgData/'

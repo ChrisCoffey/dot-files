@@ -75,6 +75,7 @@ nnoremap <leader>wl <c-w>l
 nnoremap <leader>wh <c-w>h
 nnoremap <leader>wj <c-w>j
 nnoremap <leader>wk <c-w>k
+nnoremap <leader>a :b#<cr>
 " }}}
 
 "Editing mapping ------- {{{
@@ -112,6 +113,7 @@ augroup scalaGrp
     au FileType scala setlocal foldmethod=syntax
     au FileType scala normal zR
     au FileType scala nnoremap <buffer> <localleader>cc :<c-u>normal! ^i//<esc><cr>
+    au BufWritePost *.scala :EnTypeCheck
     nnoremap <localleader>t :EnType<CR>
     nnoremap <localleader>d :EnDeclaration<CR>
     nnoremap <localleader>dh :EnDeclarationSplit<CR>
@@ -151,7 +153,7 @@ augroup END
 augroup typescriptGrp
     autocmd!
     autocmd FileType typescript nmap <buffer> <localleader>r :<C-u>echo tsuquyomi#hint()<CR>
-    autocmd FileType typescript nnoremap <localleader>c :exec "!tsc"<cr>:exec "redraw!"<cr>
+    autocmd FileType typescript nnoremap <localleader>c :exec "!tsc"<cr>:exec "!webpack"<cr>:exec "redraw!"<cr>
 augroup END
 " }}}
 
