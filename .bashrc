@@ -27,7 +27,7 @@ alias sghci="stack ghci"
 alias sghc="stack ghc"
 alias shapeless="~/bin/bootScripts/shapeless.sh"
 alias fs2="~/bin/bootScripts/fs2.sh"
-alias szs="~/bin/bootScripts/scalaZs"
+alias szs="~/bin/bootScripts/scalazS.sh"
 alias genny="/Applications/Genymotion\ Shell.app/Contents/MacOS/gennyshell"
 
 
@@ -42,6 +42,7 @@ export SBT_OPTS="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,addres
 export PATH=$PATH:$SCALA_HOME
 export PATH=$PATH:$SCALA_HOME/bin
 export PATH=$PATH:/Users/ccoffey/bin
+export PATH=$PATH:/Users/ccoffey/.local/bin
 export PATH=$PATH:/Users/ccoffey/bin/bootScripts/git
 export PATH=$PATH:/usr/local/bin
 export PATH=$PATH:/Users/ccoffey/bin/s3cmd-1.5.0-rc1

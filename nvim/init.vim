@@ -15,10 +15,11 @@ Plug 'kien/ctrlp.vim'
 Plug 'tpope/vim-speeddating'
 Plug 'scrooloose/nerdtree'
 Plug 'mtth/scratch.vim'
+Plug 'shougo/deoplete.nvim'
 
 " Haskell
-Plug 'lukerandall/haskellmode-vim'
-Plug 'bitc/vim-hdevtools'
+Plug 'eagletmt/ghcmod-vim'
+Plug 'eagletmt/neco-ghc'
 
 " Elm
 Plug 'elm.vim'
@@ -53,7 +54,7 @@ syntax on
 set spelllang=en_us
 set number numberwidth=2
 set tags=./.tags,.tags,./tags,tags
-set tabstop=8 softtabstop=4 expandtab shiftwidth=4 smarttab shiftround
+set tabstop=4 softtabstop=2 expandtab shiftwidth=2 smarttab shiftround
 set nowrap
 
 set statusline+=%#warningmsg#
@@ -65,6 +66,8 @@ set statusline+=\ -\
 set statusline+=FileType:
 set statusline+=%y
 set statusline+=\ col:\ %c,
+
+
 " }}}
 
 " Meta mappings ------- {{{
@@ -76,6 +79,7 @@ nnoremap <leader>wh <c-w>h
 nnoremap <leader>wj <c-w>j
 nnoremap <leader>wk <c-w>k
 nnoremap <leader>a :b#<cr>
+inoremap ooo <c-x><c-o>
 " }}}
 
 "Editing mapping ------- {{{
@@ -132,15 +136,21 @@ augroup END
 " }}}
 
 " Haskell Setup ------- {{{
-augroup haskellGrp
-    autocmd!
-    au FileType haskell nnoremap <buffer> <F1> :HdevtoolsType<CR>
-    au FileType haskell nnoremap <buffer> <silent> <F2> :HdevtoolsClear<CR>
-    autocmd FileType haskell nnoremap <buffer> <leader>cc :<c-u>normal! ^i--<esc><cr>
-augroup END
 let g:haddock_browser="open"
 let g:haddock_browser_callformat="%s %s"
-
+let g:deoplete#enable_at_startup = 1
+let g:haskellmode_completion_ghc = 0
+augroup haskellGrp
+    autocmd!
+    au FileType haskell nnoremap <buffer> <localleader>t :GhcModType<CR>
+    au FileType haskell nnoremap <buffer> <localleader>r :GhcModTypeClear<CR>
+    au FileType haskell nnoremap <buffer> <localleader>l :GhcModLint<CR>
+    au FileType haskell nnoremap <buffer> <localleader>e :GhcModExpand<CR>
+    au FileType haskell nnoremap <buffer> <localleader>d :GhcModSigCodegen<CR>
+    autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+    autocmd FileType haskell nnoremap <buffer> <leader>cc :<c-u>normal! ^i--<esc><cr>
+    au BufWritePost FileType haskell :GhcModCheckAndLintAsync
+augroup END
 " }}}
 
 " Javascript Setup ------- {{{
@@ -160,7 +170,6 @@ augroup END
 " Markdown Setup ------- {{{
 augroup markdownGrp
     autocmd!
-    au FileType markdown :spell nowrap
 augroup END
 " }}}
 
