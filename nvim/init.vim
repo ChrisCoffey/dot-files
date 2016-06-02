@@ -95,6 +95,7 @@ nnoremap <c-u> viwU
 onoremap p i(
 onoremap b i{
 onoremap sb i[
+onoremap n i<
 
 " }}}
 
@@ -138,7 +139,7 @@ augroup END
 " Haskell Setup ------- {{{
 let g:haddock_browser="open"
 let g:haddock_browser_callformat="%s %s"
-let g:deoplete#enable_at_startup = 1
+" let g:deoplete#enable_at_startup = 1
 let g:haskellmode_completion_ghc = 0
 augroup haskellGrp
     autocmd!

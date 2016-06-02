@@ -13,9 +13,12 @@ alias ws="cd ~/workspace"
 alias wsl="cd ~/workspace/leaf"
 alias wsp="cd ~/workspace/personal"
 alias wso="cd ~/workspace/open_source"
+alias wsc="cd ~/workspace/consulting"
+alias wsrk="cd ~/workspace/consulting/rk"
 alias wspr="cd ~/workspace/proxy"
 alias wsr="cd ~/workspace/roundtown"
 alias wsi="cd ~/workspace/consulting/inmoji"
+alias wscv="cd ~/workspace/college_vine"
 alias wsv="cd ~/.config/nvim/plugged"
 alias 3p="cd ~/3rdParty"
 alias sbt13="~/3rdParty/sbt_13.5/bin/sbt"
@@ -38,6 +41,7 @@ export SCALA_HOME="/Users/ccoffey/bin/scala_current"
 export JAVA_HOME=$(/usr/libexec/java_home -v 1.8.0_05)
 export JAVA_OPTIONS="-Xms64m -Xmx4G -Xss2m -XX:MaxPermSize=2G"
 export SBT_OPTS="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=9999"
+export GEM_HOME=/usr/local/bin/ruby/2.0.0/gems
 
 export PATH=$PATH:$SCALA_HOME
 export PATH=$PATH:$SCALA_HOME/bin
@@ -49,6 +53,7 @@ export PATH=$PATH:/Users/ccoffey/bin/s3cmd-1.5.0-rc1
 export PATH=~/anaconda/bin:$PATH
 export PATH=~/bin/spark-1.2.1-bin-hadoop2.4/bin:$PATH
 export PATH=~/3rdParty/phantomjs/bin/:$PATH
+export PATH=$GEM_HOME:$PATH
 
 export LDFLAGS="-L/usr/local/opt/llvm/lib"
 export CPPFLAGS="-I/usr/local/opt/llvm/include"
@@ -63,7 +68,7 @@ export DOCKER_TLS_VERIFY=1
 ########################
 
 source ~/bin/bootScripts/git/gitFuncs.sh
-source ~/bin/bootScripts/export.awsKeys.sh
 source ~/bin/bootScripts/mongo.sh
 source ~/bin/bootScripts/roundtown.sh
 source ~/bin/bootScripts/proxy.sh
+source ~/bin/bootScripts/contract.sh
