@@ -21,6 +21,7 @@ Plug 'shougo/deoplete.nvim'
 Plug 'eagletmt/ghcmod-vim'
 Plug 'eagletmt/neco-ghc'
 
+
 " Elm
 Plug 'elm.vim'
 
@@ -99,6 +100,11 @@ onoremap n i<
 
 " }}}
 
+"Register deoplete
+call remote#host#RegisterPlugin('python3', '/home/ccoffey/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/deoplete.py', [
+      \ {'sync': 1, 'name': 'DeopleteInitializePython', 'type': 'command', 'opts': {}},
+     \ ])
+
 "Search mapping ---------{{{
   nnoremap <leader>t :NERDTreeToggle<cr>
 "}}}
@@ -139,8 +145,9 @@ augroup END
 " Haskell Setup ------- {{{
 let g:haddock_browser="open"
 let g:haddock_browser_callformat="%s %s"
-" let g:deoplete#enable_at_startup = 1
-let g:haskellmode_completion_ghc = 0
+let g:deoplete#enable_at_startup = 1
+let g:haskellmode_completion_ghc = 1
+let g:necoghc_enable_detailed_browse = 1
 augroup haskellGrp
     autocmd!
     au FileType haskell nnoremap <buffer> <localleader>t :GhcModType<CR>
@@ -148,6 +155,7 @@ augroup haskellGrp
     au FileType haskell nnoremap <buffer> <localleader>l :GhcModLint<CR>
     au FileType haskell nnoremap <buffer> <localleader>e :GhcModExpand<CR>
     au FileType haskell nnoremap <buffer> <localleader>d :GhcModSigCodegen<CR>
+    au FileType haskell nnoremap <buffer> <localleader>f :GhcModInfoPreview
     autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
     autocmd FileType haskell nnoremap <buffer> <leader>cc :<c-u>normal! ^i--<esc><cr>
     au BufWritePost FileType haskell :GhcModCheckAndLintAsync

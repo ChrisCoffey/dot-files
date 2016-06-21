@@ -72,3 +72,4 @@ source ~/bin/bootScripts/mongo.sh
 source ~/bin/bootScripts/roundtown.sh
 source ~/bin/bootScripts/proxy.sh
 source ~/bin/bootScripts/contract.sh
+source ~/bin/bootScripts/cv.sh
