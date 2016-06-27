@@ -16,6 +16,7 @@ Plug 'tpope/vim-speeddating'
 Plug 'scrooloose/nerdtree'
 Plug 'mtth/scratch.vim'
 Plug 'shougo/deoplete.nvim'
+Plug 'mkarmona/colorsbox'
 
 " Haskell
 Plug 'eagletmt/ghcmod-vim'
