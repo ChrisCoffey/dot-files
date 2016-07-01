@@ -56,7 +56,7 @@ syntax on
 set spelllang=en_us
 set number numberwidth=2
 set tags=./.tags,.tags,./tags,tags
-set tabstop=4 softtabstop=2 expandtab shiftwidth=2 smarttab shiftround
+set tabstop=4 softtabstop=4 expandtab shiftwidth=4 smarttab shiftround
 set nowrap
 
 set statusline+=%#warningmsg#
