@@ -16,13 +16,15 @@ Plug 'tpope/vim-speeddating'
 Plug 'scrooloose/nerdtree'
 Plug 'mtth/scratch.vim'
 Plug 'shougo/deoplete.nvim'
-Plug 'mkarmona/colorsbox'
 Plug 'rizzatti/dash.vim'
 
 " Haskell
 Plug 'eagletmt/ghcmod-vim'
 Plug 'eagletmt/neco-ghc'
 
+" Purescript
+Plug 'frigoeu/psc-ide-vim'
+Plug 'raichoo/purescript-vim'
 
 " Elm
 Plug 'elm.vim'
@@ -102,11 +104,18 @@ onoremap n i<
 
 " }}}
 
-"Register deoplete
+"Register deoplete -------- {{{
 call remote#host#RegisterPlugin('python3', '/home/ccoffey/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/deoplete.py', [
       \ {'sync': 1, 'name': 'DeopleteInitializePython', 'type': 'command', 'opts': {}},
      \ ])
 
+let g:deoplete#enable_at_startup = 1
+if !exists('g:deoplete#omni#input_patterns')
+    let g:deoplete#omni#input_patterns = {}
+endif
+
+"}}}
+"
 "Search mapping ---------{{{
   nnoremap <leader>t :NERDTreeToggle<cr>
 "}}}
@@ -116,7 +125,7 @@ call remote#host#RegisterPlugin('python3', '/home/ccoffey/.config/nvim/plugged/d
 
 "Syntastic setup ------- {{{
 set statusline+=%{SyntasticStatuslineFlag()}
-let g:syntastic_javascript_checkers = ['jshint']
+let g:syntastic_javascript_checkers = ['eslint']
 " }}}
 
 " Ensime --------- {{{
@@ -147,7 +156,6 @@ augroup END
 " Haskell Setup ------- {{{
 let g:haddock_browser="open"
 let g:haddock_browser_callformat="%s %s"
-let g:deoplete#enable_at_startup = 1
 let g:haskellmode_completion_ghc = 1
 let g:necoghc_enable_detailed_browse = 1
 augroup haskellGrp
@@ -157,10 +165,23 @@ augroup haskellGrp
     au FileType haskell nnoremap <buffer> <localleader>l :GhcModLint<CR>
     au FileType haskell nnoremap <buffer> <localleader>e :GhcModExpand<CR>
     au FileType haskell nnoremap <buffer> <localleader>d :GhcModSigCodegen<CR>
-    au FileType haskell nnoremap <buffer> <localleader>f :GhcModInfoPreview
+    au FileType haskell nnoremap <buffer> <localleader>f :GhcModInfoPreview<CR>
+    au FileType haskell nnoremap <buffer> <localleader>lp :execute "normal! ggi{-# LANGUAGE #-}\<cr>\<esc>kfEa"
     autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
     autocmd FileType haskell nnoremap <buffer> <leader>cc :<c-u>normal! ^i--<esc><cr>
     au BufWritePost FileType haskell :GhcModCheckAndLintAsync
+augroup END
+" }}}
+
+" Purescript Setup ------ {{{
+augroup purescriptGrp
+    autocmd!
+    au FileType purescript nnoremap <buffer> <localleader>t :PSCIDEtype<CR>
+    au FileType purescript nnoremap <buffer> <localleader>an :PSCIDEaddTypeAnnotation<CR>
+    au FileType purescript nnoremap <buffer> <localleader>ii :PSCIDEimportIdentifier<CR>
+    au FileType purescript nnoremap <buffer> <localleader>ap :PSCIDEapplySuggestion<CR>
+    au FileType purescript nnoremap <buffer> <localleader>b !pulp build<CR>
+    autocmd FileType purescript setlocal omnifunc=PSCIDEomni
 augroup END
 " }}}
 
