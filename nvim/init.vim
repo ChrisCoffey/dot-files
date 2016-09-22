@@ -17,13 +17,14 @@ Plug 'scrooloose/nerdtree'
 Plug 'mtth/scratch.vim'
 Plug 'shougo/deoplete.nvim'
 Plug 'rizzatti/dash.vim'
+Plug 'altercation/vim-colors-solarized'
 
 " Haskell
 Plug 'eagletmt/ghcmod-vim'
 Plug 'eagletmt/neco-ghc'
 
 " Purescript
-Plug 'frigoeu/psc-ide-vim'
+Plug 'frigoeu/psc-ide-vim', {'tag': '0.6.0'}
 Plug 'raichoo/purescript-vim'
 
 " Elm
@@ -83,6 +84,7 @@ nnoremap <leader>wl <c-w>l
 nnoremap <leader>wh <c-w>h
 nnoremap <leader>wj <c-w>j
 nnoremap <leader>wk <c-w>k
+nnoremap <leader>tt :tabn<cr>
 nnoremap <leader>a :b#<cr>
 inoremap ooo <c-x><c-o>
 " }}}
