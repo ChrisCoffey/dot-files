@@ -26,12 +26,24 @@ alias play="~/3rdParty/play-2.2.3/play"
 alias activator="~/3rdParty/activator-1.2.3-minimal/activator"
 alias clearsbt='export SBT_OPTS=""'
 alias sparkNotebook='(~/bin/spark-notebook-0.6.1-scala-2.10.4-spark-1.5.0-hadoop-2.2.0/bin/spark-notebook)'
-alias sghci="stack ghci"
-alias sghc="stack ghc"
 alias shapeless="~/bin/bootScripts/shapeless.sh"
 alias fs2="~/bin/bootScripts/fs2.sh"
 alias szs="~/bin/bootScripts/scalazS.sh"
 alias genny="/Applications/Genymotion\ Shell.app/Contents/MacOS/gennyshell"
+
+##########################
+### Haskell Aliases   ####
+##########################
+alias hb="stack build"
+alias sghci="stack ghci"
+alias sghc="stack ghc"
+alias hdevtools='stack exec --no-ghc-package-path --package hdevtools hdevtools --'
+
+##########################
+### Haskell Aliases   ####
+##########################
+alias pb="pulp build"
+alias pr="npm run start"
 
 
 alias startpsql=' postgres -D /Users/ccoffey/bin/pgData/'
@@ -54,6 +66,7 @@ export PATH=~/anaconda/bin:$PATH
 export PATH=~/bin/spark-1.2.1-bin-hadoop2.4/bin:$PATH
 export PATH=~/3rdParty/phantomjs/bin/:$PATH
 export PATH=$GEM_HOME:$PATH
+export PATH=$PATH:/Users/ccoffey/.stack/programs/x86_64-osx/ghc-8.0.1/bin/ghc
 
 export LDFLAGS="-L/usr/local/opt/llvm/lib"
 export CPPFLAGS="-I/usr/local/opt/llvm/include"

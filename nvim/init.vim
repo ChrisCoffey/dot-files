@@ -8,7 +8,8 @@ Plug 'VundleVim/Vundle.vim'
 Plug 'majutsushi/tagbar'
 Plug 'gregsexton/MatchTag'
 Plug 'tpope/vim-fugitive'
-Plug 'scrooloose/syntastic'
+" Plug 'scrooloose/syntastic'
+Plug 'neomake/neomake'
 Plug 'Shougo/vimproc.vim'
 Plug 'jceb/vim-orgmode'
 Plug 'kien/ctrlp.vim'
@@ -24,7 +25,7 @@ Plug 'eagletmt/ghcmod-vim'
 Plug 'eagletmt/neco-ghc'
 
 " Purescript
-Plug 'frigoeu/psc-ide-vim', {'tag': '0.6.0'}
+Plug 'frigoeu/psc-ide-vim' ", {'tag': '0.6.0'}
 Plug 'raichoo/purescript-vim'
 
 " Elm
@@ -56,6 +57,7 @@ let mapleader = "-"
 let maplocalleader= "\\"
 filetype plugin indent on 
 syntax on
+"set shell=bash\ -i
 
 set spelllang=en_us
 set number numberwidth=2
@@ -104,17 +106,17 @@ onoremap b i{
 onoremap sb i[
 onoremap n i<
 
+"Formatting
+com! FormatJSON %!python -m json.tool
+
+func! DeleteTrailingWS()
+  exe "normal mz"
+  %s/\s\+$//ge
+  exe "normal `z"
+endfunc
+
 " }}}
 
-"Register deoplete -------- {{{
-call remote#host#RegisterPlugin('python3', '/home/ccoffey/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/deoplete.py', [
-      \ {'sync': 1, 'name': 'DeopleteInitializePython', 'type': 'command', 'opts': {}},
-     \ ])
-
-let g:deoplete#enable_at_startup = 1
-if !exists('g:deoplete#omni#input_patterns')
-    let g:deoplete#omni#input_patterns = {}
-endif
 
 "}}}
 "
@@ -126,8 +128,8 @@ endif
 " }}}
 
 "Syntastic setup ------- {{{
-set statusline+=%{SyntasticStatuslineFlag()}
-let g:syntastic_javascript_checkers = ['eslint']
+" set statusline+=%{SyntasticStatuslineFlag()}
+" let g:syntastic_javascript_checkers = ['eslint']
 " }}}
 
 " Ensime --------- {{{
@@ -169,13 +171,17 @@ augroup haskellGrp
     au FileType haskell nnoremap <buffer> <localleader>d :GhcModSigCodegen<CR>
     au FileType haskell nnoremap <buffer> <localleader>f :GhcModInfoPreview<CR>
     au FileType haskell nnoremap <buffer> <localleader>lp :execute "normal! ggi{-# LANGUAGE #-}\<cr>\<esc>kfEa"
+    au FileType haskell nnoremap <buffer> <localleader>a :GhcModCheckAndLintAsync<CR>
+    
     autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
     autocmd FileType haskell nnoremap <buffer> <leader>cc :<c-u>normal! ^i--<esc><cr>
-    au BufWritePost FileType haskell :GhcModCheckAndLintAsync
+    au BufWritePost *.hs :Neomake 
 augroup END
 " }}}
 
 " Purescript Setup ------ {{{
+let g:psc_ide_syntastic_mode= 1
+let g:psc_ide_log_level= 1
 augroup purescriptGrp
     autocmd!
     au FileType purescript nnoremap <buffer> <localleader>t :PSCIDEtype<CR>
@@ -184,6 +190,7 @@ augroup purescriptGrp
     au FileType purescript nnoremap <buffer> <localleader>ap :PSCIDEapplySuggestion<CR>
     au FileType purescript nnoremap <buffer> <localleader>b !pulp build<CR>
     autocmd FileType purescript setlocal omnifunc=PSCIDEomni
+    au BufWritePost FileType purescript <buffer> :call DeleteTrailingWS() 
 augroup END
 " }}}
 
@@ -214,3 +221,13 @@ augroup vimscriptGrp
 augroup END
 
 " }}}
+
+"Register deoplete -------- {{{
+call remote#host#RegisterPlugin('python3', '/home/ccoffey/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/deoplete.py', [
+      \ {'sync': 1, 'name': 'DeopleteInitializePython', 'type': 'command', 'opts': {}},
+     \ ])
+
+let g:deoplete#enable_at_startup = 1
+if !exists('g:deoplete#omni#input_patterns')
+    let g:deoplete#omni#input_patterns = {}
+endif
