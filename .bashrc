@@ -40,11 +40,10 @@ alias sghc="stack ghc"
 alias hdevtools='stack exec --no-ghc-package-path --package hdevtools hdevtools --'
 
 ##########################
-### Haskell Aliases   ####
+### Purescript Aliases   ####
 ##########################
 alias pb="pulp build"
 alias pr="npm run start"
-
 
 alias startpsql=' postgres -D /Users/ccoffey/bin/pgData/'
 

@@ -48,6 +48,8 @@ Plug 'klen/python-mode'
 Plug 'wookiehangover/jshint.vim'
 Plug 'Quramy/tsuquyomi'
 Plug 'leafgarland/typescript-vim'
+Plug 'mxw/vim-jsx'
+Plug 'pangloss/vim-javascript'
 
 call plug#end()
 " }}}
@@ -74,6 +76,7 @@ set statusline+=\ -\
 set statusline+=FileType:
 set statusline+=%y
 set statusline+=\ col:\ %c,
+
 
 
 " }}}
@@ -132,6 +135,13 @@ endfunc
 " let g:syntastic_javascript_checkers = ['eslint']
 " }}}
 
+" Neomake setup -------- {{{
+let g:neomake_warning_sign = {'text': '>>'}
+let g:neomake_error_sign = {'text': 'XX'}
+let g:neomake_info_sign = {'text': '>>' }
+
+" }}}
+
 " Ensime --------- {{{
 augroup scalaGrp
     autocmd!
@@ -186,7 +196,7 @@ augroup purescriptGrp
     autocmd!
     au FileType purescript nnoremap <buffer> <localleader>t :PSCIDEtype<CR>
     au FileType purescript nnoremap <buffer> <localleader>an :PSCIDEaddTypeAnnotation<CR>
-    au FileType purescript nnoremap <buffer> <localleader>ii :PSCIDEimportIdentifier<CR>
+    au FileType purescript nnoremap <buffer> <localleader>gt :PSCIDEgoToDefinition<CR>
     au FileType purescript nnoremap <buffer> <localleader>ap :PSCIDEapplySuggestion<CR>
     au FileType purescript nnoremap <buffer> <localleader>b !pulp build<CR>
     autocmd FileType purescript setlocal omnifunc=PSCIDEomni
@@ -199,6 +209,8 @@ augroup javascriptGrp
     autocmd!
     au FileType javascript nnoremap <buffer> <leader>=>  :<c-u>normal! F(i function <esc> f)a{<cr><cr>}<esc>ka<tab><cr>
     au FileType javascript nnoremap <buffer> <localleader>cc :<c-u>normal! ^i//<esc><cr>
+    au FileType javascript setlocal tabstop=2 softtabstop=2 shiftwidth=2 
+    au FileType javascript.jsx setlocal tabstop=2 softtabstop=2 shiftwidth=2 
 augroup END
 
 augroup typescriptGrp
@@ -230,4 +242,9 @@ call remote#host#RegisterPlugin('python3', '/home/ccoffey/.config/nvim/plugged/d
 let g:deoplete#enable_at_startup = 1
 if !exists('g:deoplete#omni#input_patterns')
     let g:deoplete#omni#input_patterns = {}
+endif
+
+let startHour = strftime('%H')
+if (startHour > 7) && (startHour < 16)
+    :exec "colorscheme solarized"
 endif
