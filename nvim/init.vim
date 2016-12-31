@@ -8,8 +8,8 @@ Plug 'VundleVim/Vundle.vim'
 Plug 'majutsushi/tagbar'
 Plug 'gregsexton/MatchTag'
 Plug 'tpope/vim-fugitive'
-" Plug 'scrooloose/syntastic'
-Plug 'neomake/neomake'
+Plug 'scrooloose/syntastic'
+" Plug 'neomake/neomake'
 Plug 'Shougo/vimproc.vim'
 Plug 'jceb/vim-orgmode'
 Plug 'kien/ctrlp.vim'
@@ -23,6 +23,7 @@ Plug 'altercation/vim-colors-solarized'
 " Haskell
 Plug 'eagletmt/ghcmod-vim'
 Plug 'eagletmt/neco-ghc'
+Plug 'bitc/vim-hdevtools'
 
 " Purescript
 Plug 'frigoeu/psc-ide-vim' ", {'tag': '0.6.0'}
@@ -131,14 +132,14 @@ endfunc
 " }}}
 
 "Syntastic setup ------- {{{
-" set statusline+=%{SyntasticStatuslineFlag()}
-" let g:syntastic_javascript_checkers = ['eslint']
+set statusline+=%{SyntasticStatuslineFlag()}
+let g:syntastic_javascript_checkers = ['eslint']
 " }}}
 
 " Neomake setup -------- {{{
-let g:neomake_warning_sign = {'text': '>>'}
-let g:neomake_error_sign = {'text': 'XX'}
-let g:neomake_info_sign = {'text': '>>' }
+" let g:neomake_warning_sign = {'text': '>>'}
+" let g:neomake_error_sign = {'text': 'XX'}
+" let g:neomake_info_sign = {'text': '>>' }
 
 " }}}
 
@@ -174,18 +175,17 @@ let g:haskellmode_completion_ghc = 1
 let g:necoghc_enable_detailed_browse = 1
 augroup haskellGrp
     autocmd!
-    au FileType haskell nnoremap <buffer> <localleader>t :GhcModType<CR>
-    au FileType haskell nnoremap <buffer> <localleader>r :GhcModTypeClear<CR>
+    au FileType haskell nnoremap <buffer> <localleader>t :HdevtoolsType<CR>
+    au FileType haskell nnoremap <buffer> <localleader>r :HdevtoolsClear<CR>
     au FileType haskell nnoremap <buffer> <localleader>l :GhcModLint<CR>
     au FileType haskell nnoremap <buffer> <localleader>e :GhcModExpand<CR>
     au FileType haskell nnoremap <buffer> <localleader>d :GhcModSigCodegen<CR>
-    au FileType haskell nnoremap <buffer> <localleader>f :GhcModInfoPreview<CR>
+    au FileType haskell nnoremap <buffer> <localleader>f :HdevtoolsInfo<CR>
     au FileType haskell nnoremap <buffer> <localleader>lp :execute "normal! ggi{-# LANGUAGE #-}\<cr>\<esc>kfEa"
     au FileType haskell nnoremap <buffer> <localleader>a :GhcModCheckAndLintAsync<CR>
     
     autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
-    autocmd FileType haskell nnoremap <buffer> <leader>cc :<c-u>normal! ^i--<esc><cr>
-    au BufWritePost *.hs :Neomake 
+    " au BufWritePost *.hs :Neomake 
 augroup END
 " }}}
 
@@ -235,10 +235,6 @@ augroup END
 " }}}
 
 "Register deoplete -------- {{{
-call remote#host#RegisterPlugin('python3', '/home/ccoffey/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/deoplete.py', [
-      \ {'sync': 1, 'name': 'DeopleteInitializePython', 'type': 'command', 'opts': {}},
-     \ ])
-
 let g:deoplete#enable_at_startup = 1
 if !exists('g:deoplete#omni#input_patterns')
     let g:deoplete#omni#input_patterns = {}
