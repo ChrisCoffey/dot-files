@@ -35,6 +35,7 @@ alias genny="/Applications/Genymotion\ Shell.app/Contents/MacOS/gennyshell"
 ### Haskell Aliases   ####
 ##########################
 alias hb="stack build"
+alias hbl="stack build .."
 alias sghci="stack ghci"
 alias sghc="stack ghc"
 alias hdevtools='stack exec --no-ghc-package-path --package hdevtools hdevtools --'
