@@ -48,12 +48,16 @@ alias pr="npm run start"
 
 alias startpsql=' postgres -D /Users/ccoffey/bin/pgData/'
 
+#########################
+### Path Variables    ###
+#########################
 export WS="/Users/ccoffey/workspace"
 export SCALA_HOME="/Users/ccoffey/bin/scala_current"
 export JAVA_HOME=$(/usr/libexec/java_home -v 1.8.0_05)
 export JAVA_OPTIONS="-Xms64m -Xmx4G -Xss2m -XX:MaxPermSize=2G"
 export SBT_OPTS="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=9999"
 export GEM_HOME=/usr/local/bin/ruby/2.0.0/gems
+export RABBIT_HOME=/usr/local/Cellar/rabbitmq/3.6.6/sbin
 
 export PATH=$PATH:$SCALA_HOME
 export PATH=$PATH:$SCALA_HOME/bin
@@ -66,6 +70,7 @@ export PATH=~/anaconda/bin:$PATH
 export PATH=~/bin/spark-1.2.1-bin-hadoop2.4/bin:$PATH
 export PATH=~/3rdParty/phantomjs/bin/:$PATH
 export PATH=$GEM_HOME:$PATH
+export PATH=$RABBIT_HOME:$PATH
 export PATH=$PATH:/Users/ccoffey/.stack/programs/x86_64-osx/ghc-8.0.1/bin/ghc
 
 export LDFLAGS="-L/usr/local/opt/llvm/lib"
