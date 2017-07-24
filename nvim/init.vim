@@ -1,4 +1,4 @@
-
+set mouse=a
 " Plug Init ----- {{{
 call plug#begin()
 
@@ -29,18 +29,12 @@ Plug 'bitc/vim-hdevtools'
 Plug 'frigoeu/psc-ide-vim' ", {'tag': '0.6.0'}
 Plug 'raichoo/purescript-vim'
 
-" Elm
-Plug 'elm.vim'
-
 " Scala
 Plug 'derekwyatt/vim-sbt'
-Plug 'ChrisCoffey/ensime-vim'
+Plug 'ensime/ensime-vim'
 
 " Clojure
-Plug 'rainbow_parentheses.vim'
-
-" Swift
-Plug 'cocoa.vim'
+Plug 'kien/rainbow_parentheses.vim'
 
 " Python
 Plug 'klen/python-mode'
@@ -52,6 +46,9 @@ Plug 'leafgarland/typescript-vim'
 Plug 'mxw/vim-jsx'
 Plug 'pangloss/vim-javascript'
 
+" Rust
+Plug 'rust-lang/rust.vim'
+
 call plug#end()
 " }}}
 
@@ -60,6 +57,10 @@ let mapleader = "-"
 let maplocalleader= "\\"
 filetype plugin indent on 
 syntax on
+
+let g:scratch_horizontal=0
+let g:deoplete#max_abbr_width=120
+let g:deoplete#max_menu_width=120
 "set shell=bash\ -i
 
 set spelllang=en_us
@@ -119,6 +120,7 @@ func! DeleteTrailingWS()
   exe "normal `z"
 endfunc
 
+au BufWritePre * call DeleteTrailingWS() 
 " }}}
 
 
@@ -200,7 +202,6 @@ augroup purescriptGrp
     au FileType purescript nnoremap <buffer> <localleader>ap :PSCIDEapplySuggestion<CR>
     au FileType purescript nnoremap <buffer> <localleader>b !pulp build<CR>
     autocmd FileType purescript setlocal omnifunc=PSCIDEomni
-    au BufWritePost FileType purescript <buffer> :call DeleteTrailingWS() 
 augroup END
 " }}}
 
@@ -217,6 +218,12 @@ augroup typescriptGrp
     autocmd!
     autocmd FileType typescript nmap <buffer> <localleader>r :<C-u>echo tsuquyomi#hint()<CR>
     autocmd FileType typescript nnoremap <localleader>c :exec "!tsc"<cr>:exec "!webpack"<cr>:exec "redraw!"<cr>
+augroup END
+" }}}
+
+" Rust Setup ---------- {{{
+augroup rustGrp
+    autocmd!
 augroup END
 " }}}
 

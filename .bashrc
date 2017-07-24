@@ -1,4 +1,4 @@
-############ 
+############
 #
 #  Config Variables
 #
@@ -7,7 +7,7 @@ ulimit -n 4096
 
 alias ..="cd .."
 alias ...=".. && .."
-alias ....=".. && ..." 
+alias ....=".. && ..."
 alias ll="ls -al"
 alias ws="cd ~/workspace"
 alias wsl="cd ~/workspace/leaf"
@@ -30,11 +30,14 @@ alias shapeless="~/bin/bootScripts/shapeless.sh"
 alias fs2="~/bin/bootScripts/fs2.sh"
 alias szs="~/bin/bootScripts/scalazS.sh"
 alias genny="/Applications/Genymotion\ Shell.app/Contents/MacOS/gennyshell"
+alias rmorig='find ./ -name "*.orig" -delete'
+alias hdc='killall hdevtools'
 
 ##########################
 ### Haskell Aliases   ####
 ##########################
 alias hb="stack build"
+alias hbd="stack build --haddock --no-haddock-deps --haddock-internal"
 alias hbl="stack build .."
 alias sghci="stack ghci"
 alias sghc="stack ghc"
@@ -43,8 +46,8 @@ alias hdevtools='stack exec --no-ghc-package-path --package hdevtools hdevtools 
 ##########################
 ### Purescript Aliases   ####
 ##########################
-alias pb="pulp build"
-alias pr="npm run start"
+alias pb="yarn run pulp build"
+alias pr="yarn run start"
 
 alias startpsql=' postgres -D /Users/ccoffey/bin/pgData/'
 
@@ -66,7 +69,6 @@ export PATH=$PATH:/Users/ccoffey/.local/bin
 export PATH=$PATH:/Users/ccoffey/bin/bootScripts/git
 export PATH=$PATH:/usr/local/bin
 export PATH=$PATH:/Users/ccoffey/bin/s3cmd-1.5.0-rc1
-export PATH=~/anaconda/bin:$PATH
 export PATH=~/bin/spark-1.2.1-bin-hadoop2.4/bin:$PATH
 export PATH=~/3rdParty/phantomjs/bin/:$PATH
 export PATH=$GEM_HOME:$PATH
