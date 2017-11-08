@@ -24,9 +24,10 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'eagletmt/ghcmod-vim'
 Plug 'eagletmt/neco-ghc'
 Plug 'bitc/vim-hdevtools'
+Plug 'parsonsmatt/intero-neovim'
 
 " Purescript
-Plug 'frigoeu/psc-ide-vim' ", {'tag': '0.6.0'}
+"Plug 'frigoeu/psc-ide-vim' ", {'tag': '0.6.0'}
 Plug 'raichoo/purescript-vim'
 
 " Scala
@@ -55,7 +56,7 @@ call plug#end()
 " Basic nav and setup ------- {{{
 let mapleader = "-"
 let maplocalleader= "\\"
-filetype plugin indent on 
+filetype plugin indent on
 syntax on
 
 let g:scratch_horizontal=0
@@ -74,7 +75,7 @@ set statusline+=%*
 set statusline+=%=     " Right aligned from here on
 set statusline+=%f
 set statusline+=\ [%4L]
-set statusline+=\ -\ 
+set statusline+=\ -\
 set statusline+=FileType:
 set statusline+=%y
 set statusline+=\ col:\ %c,
@@ -120,7 +121,7 @@ func! DeleteTrailingWS()
   exe "normal `z"
 endfunc
 
-au BufWritePre * call DeleteTrailingWS() 
+au BufWritePre * call DeleteTrailingWS()
 " }}}
 
 
@@ -135,7 +136,7 @@ au BufWritePre * call DeleteTrailingWS()
 
 "Syntastic setup ------- {{{
 set statusline+=%{SyntasticStatuslineFlag()}
-let g:syntastic_javascript_checkers = ['eslint']
+"let g:syntastic_javascript_checkers = ['eslint']
 " }}}
 
 " Neomake setup -------- {{{
@@ -177,23 +178,28 @@ let g:haskellmode_completion_ghc = 1
 let g:necoghc_enable_detailed_browse = 1
 augroup haskellGrp
     autocmd!
-    au FileType haskell nnoremap <buffer> <localleader>t :HdevtoolsType<CR>
+    au FileType haskell nnoremap <buffer> <localleader>t :InteroGenericType<CR>
+    au FileType haskell nnoremap <buffer> <localleader>o :InteroOpen<CR>
+    au FileType haskell nnoremap <buffer> <localleader>h :InteroHide<CR>
     au FileType haskell nnoremap <buffer> <localleader>r :HdevtoolsClear<CR>
     au FileType haskell nnoremap <buffer> <localleader>l :GhcModLint<CR>
     au FileType haskell nnoremap <buffer> <localleader>e :GhcModExpand<CR>
     au FileType haskell nnoremap <buffer> <localleader>d :GhcModSigCodegen<CR>
-    au FileType haskell nnoremap <buffer> <localleader>f :HdevtoolsInfo<CR>
+    au FileType haskell nnoremap <buffer> <localleader>f :InteroInfo<CR>
     au FileType haskell nnoremap <buffer> <localleader>lp :execute "normal! ggi{-# LANGUAGE #-}\<cr>\<esc>kfEa"
     au FileType haskell nnoremap <buffer> <localleader>a :GhcModCheckAndLintAsync<CR>
-    
+
     autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
-    " au BufWritePost *.hs :Neomake 
+    " au BufWritePost *.hs :Neomake
 augroup END
 " }}}
 
 " Purescript Setup ------ {{{
 let g:psc_ide_syntastic_mode= 1
 let g:psc_ide_log_level= 1
+let g:purescript_indent_let = 0
+let g:purescript_indent_where = 0
+let g:purescript_indent_dot = 0
 augroup purescriptGrp
     autocmd!
     au FileType purescript nnoremap <buffer> <localleader>t :PSCIDEtype<CR>
@@ -210,8 +216,8 @@ augroup javascriptGrp
     autocmd!
     au FileType javascript nnoremap <buffer> <leader>=>  :<c-u>normal! F(i function <esc> f)a{<cr><cr>}<esc>ka<tab><cr>
     au FileType javascript nnoremap <buffer> <localleader>cc :<c-u>normal! ^i//<esc><cr>
-    au FileType javascript setlocal tabstop=2 softtabstop=2 shiftwidth=2 
-    au FileType javascript.jsx setlocal tabstop=2 softtabstop=2 shiftwidth=2 
+    au FileType javascript setlocal tabstop=2 softtabstop=2 shiftwidth=2
+    au FileType javascript.jsx setlocal tabstop=2 softtabstop=2 shiftwidth=2
 augroup END
 
 augroup typescriptGrp
