@@ -41,7 +41,7 @@ Plug 'kien/rainbow_parentheses.vim'
 Plug 'klen/python-mode'
 
 " Javascript
-Plug 'wookiehangover/jshint.vim'
+" Plug 'wookiehangover/jshint.vim'
 Plug 'Quramy/tsuquyomi'
 Plug 'leafgarland/typescript-vim'
 Plug 'mxw/vim-jsx'
@@ -120,6 +120,8 @@ func! DeleteTrailingWS()
   %s/\s\+$//ge
   exe "normal `z"
 endfunc
+
+nnoremap <leader>gu :exec "silent !uuidgen \| pbcopy"<cr>"+p
 
 au BufWritePre * call DeleteTrailingWS()
 " }}}
@@ -206,7 +208,7 @@ augroup purescriptGrp
     au FileType purescript nnoremap <buffer> <localleader>an :PSCIDEaddTypeAnnotation<CR>
     au FileType purescript nnoremap <buffer> <localleader>gt :PSCIDEgoToDefinition<CR>
     au FileType purescript nnoremap <buffer> <localleader>ap :PSCIDEapplySuggestion<CR>
-    au FileType purescript nnoremap <buffer> <localleader>b !pulp build<CR>
+    au FileType purescript nnoremap <buffer> <localleader>b !yarn run pulp build<CR>
     autocmd FileType purescript setlocal omnifunc=PSCIDEomni
 augroup END
 " }}}
@@ -257,3 +259,4 @@ let startHour = strftime('%H')
 if (startHour > 7) && (startHour < 16)
     :exec "colorscheme solarized"
 endif
+

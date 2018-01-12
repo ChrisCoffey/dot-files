@@ -42,6 +42,12 @@ alias hbl="stack build .."
 alias sghci="stack ghci"
 alias sghc="stack ghc"
 alias hdevtools='stack exec --no-ghc-package-path --package hdevtools hdevtools --'
+alias sghci-core="stack ghci --ghci-options -ddump-simpl \
+     --ghci-options -dsuppress-idinfo \
+     --ghci-options -dsuppress-coercions \
+     --ghci-options -dsuppress-type-applications \
+     --ghci-options -dsuppress-uniques \
+     --ghci-options -dsuppress-module-prefixes"
 
 ##########################
 ### Purescript Aliases   ####
