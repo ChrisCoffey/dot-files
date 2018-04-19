@@ -9,6 +9,7 @@ Plug 'majutsushi/tagbar'
 Plug 'gregsexton/MatchTag'
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/syntastic'
+Plug 'tpope/vim-surround'
 " Plug 'neomake/neomake'
 Plug 'Shougo/vimproc.vim'
 Plug 'jceb/vim-orgmode'
@@ -27,7 +28,7 @@ Plug 'bitc/vim-hdevtools'
 Plug 'parsonsmatt/intero-neovim'
 
 " Purescript
-"Plug 'frigoeu/psc-ide-vim' ", {'tag': '0.6.0'}
+Plug 'frigoeu/psc-ide-vim'
 Plug 'raichoo/purescript-vim'
 
 " Scala
@@ -138,7 +139,7 @@ au BufWritePre * call DeleteTrailingWS()
 
 "Syntastic setup ------- {{{
 set statusline+=%{SyntasticStatuslineFlag()}
-"let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_checkers = ['eslint']
 " }}}
 
 " Neomake setup -------- {{{
@@ -176,7 +177,7 @@ augroup END
 " Haskell Setup ------- {{{
 let g:haddock_browser="open"
 let g:haddock_browser_callformat="%s %s"
-let g:haskellmode_completion_ghc = 1
+let g:haskellmode_completion_ghc = 0
 let g:necoghc_enable_detailed_browse = 1
 augroup haskellGrp
     autocmd!
@@ -198,17 +199,20 @@ augroup END
 
 " Purescript Setup ------ {{{
 let g:psc_ide_syntastic_mode= 1
-let g:psc_ide_log_level= 1
+let g:psc_ide_log_level= 0
+let g:psc_ide_server_runner=["yarn", "--silent", "purs"]
 let g:purescript_indent_let = 0
 let g:purescript_indent_where = 0
 let g:purescript_indent_dot = 0
 augroup purescriptGrp
     autocmd!
-    au FileType purescript nnoremap <buffer> <localleader>t :PSCIDEtype<CR>
-    au FileType purescript nnoremap <buffer> <localleader>an :PSCIDEaddTypeAnnotation<CR>
-    au FileType purescript nnoremap <buffer> <localleader>gt :PSCIDEgoToDefinition<CR>
-    au FileType purescript nnoremap <buffer> <localleader>ap :PSCIDEapplySuggestion<CR>
-    au FileType purescript nnoremap <buffer> <localleader>b !yarn run pulp build<CR>
+    au FileType purescript nnoremap <buffer> <localleader>t :Ptype<CR>
+    au FileType purescript nnoremap <buffer> <localleader>an :PaddType<CR>
+    au FileType purescript nnoremap <buffer> <localleader>gt :Pgoto<CR>
+    au FileType purescript nnoremap <buffer> <localleader>d :Ppursuit<CR>
+    au FileType purescript nnoremap <buffer> <localleader>ap :Papply!<CR>
+    au FileType purescript nnoremap <buffer> <localleader>ac :Pcase!<CR>
+    au FileType purescript nnoremap <buffer> <localleader>b !yarn pulp build<CR>
     autocmd FileType purescript setlocal omnifunc=PSCIDEomni
 augroup END
 " }}}
@@ -251,6 +255,7 @@ augroup END
 
 "Register deoplete -------- {{{
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#complete_method = "omnifunc"
 if !exists('g:deoplete#omni#input_patterns')
     let g:deoplete#omni#input_patterns = {}
 endif
