@@ -1,5 +1,5 @@
 set mouse=a
-" Plug Init ----- {{{
+" Plug Init -----
 call plug#begin()
 
 
@@ -10,6 +10,7 @@ Plug 'gregsexton/MatchTag'
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-surround'
+Plug 'airblade/vim-gitgutter'
 " Plug 'neomake/neomake'
 Plug 'Shougo/vimproc.vim'
 Plug 'jceb/vim-orgmode'
@@ -33,10 +34,16 @@ Plug 'raichoo/purescript-vim'
 
 " Scala
 Plug 'derekwyatt/vim-sbt'
-Plug 'ensime/ensime-vim'
+" Plug 'ensime/ensime-vim'
 
 " Clojure
 Plug 'kien/rainbow_parentheses.vim'
+
+" F#
+Plug 'fsharp/vim-fsharp', {
+      \ 'for': 'fsharp',
+      \ 'do':  'make fsautocomplete',
+      \}
 
 " Python
 Plug 'klen/python-mode'
@@ -52,9 +59,9 @@ Plug 'pangloss/vim-javascript'
 Plug 'rust-lang/rust.vim'
 
 call plug#end()
-" }}}
+"
 
-" Basic nav and setup ------- {{{
+" Basic nav and setup -------
 let mapleader = "-"
 let maplocalleader= "\\"
 filetype plugin indent on
@@ -63,6 +70,7 @@ syntax on
 let g:scratch_horizontal=0
 let g:deoplete#max_abbr_width=120
 let g:deoplete#max_menu_width=120
+set updatetime=250
 "set shell=bash\ -i
 
 set spelllang=en_us
@@ -83,9 +91,9 @@ set statusline+=\ col:\ %c,
 
 
 
-" }}}
+"
 
-" Meta mappings ------- {{{
+" Meta mappings -------
 nnoremap <leader>sv :source $MYVIMRC<cr>
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>org :Ex **/*.org <cr>
@@ -96,9 +104,9 @@ nnoremap <leader>wk <c-w>k
 nnoremap <leader>tt :tabn<cr>
 nnoremap <leader>a :b#<cr>
 inoremap ooo <c-x><c-o>
-" }}}
+"
 
-"Editing mapping ------- {{{
+"Editing mapping -------
 inoremap jk <esc>
 inoremap <esc> <nop>
 inoremap <localleader>dg <c-k>
@@ -125,31 +133,35 @@ endfunc
 nnoremap <leader>gu :exec "silent !uuidgen \| pbcopy"<cr>"+p
 
 au BufWritePre * call DeleteTrailingWS()
-" }}}
+"
 
 
 "}}}
 "
-"Search mapping ---------{{{
+"Search mapping ---------
   nnoremap <leader>t :NERDTreeToggle<cr>
-"}}}
 
-" Plugin mappings ------- {{{
-" }}}
 
-"Syntastic setup ------- {{{
+" Plugin mappings -------
+"
+
+"Syntastic setup -------
 set statusline+=%{SyntasticStatuslineFlag()}
 let g:syntastic_javascript_checkers = ['eslint']
-" }}}
+"
 
-" Neomake setup -------- {{{
+" Neomake setup --------
 " let g:neomake_warning_sign = {'text': '>>'}
 " let g:neomake_error_sign = {'text': 'XX'}
 " let g:neomake_info_sign = {'text': '>>' }
 
-" }}}
+"
 
-" Ensime --------- {{{
+" GitGutter setup
+
+"
+
+" Ensime ---------
 augroup scalaGrp
     autocmd!
     au FileType scala nnoremap <buffer> <localleader>p :<c-u>normal! ^iprivate <esc><cr>
@@ -162,9 +174,9 @@ augroup scalaGrp
     nnoremap <localleader>dh :EnDeclarationSplit<CR>
     nnoremap <localleader>dv :EnDeclarationSplit v<CR>
 augroup END
-" }}}
+"
 
-" Rainbow Parens ------- {{{
+" Rainbow Parens -------
 augroup parensGrp
     autocmd!
     au VimEnter * RainbowParenthesesToggle
@@ -172,9 +184,9 @@ augroup parensGrp
     au Syntax * RainbowParenthesesLoadSquare
     au Syntax * RainbowParenthesesLoadBraces
 augroup END
-" }}}
+"
 
-" Haskell Setup ------- {{{
+" Haskell Setup -------
 let g:haddock_browser="open"
 let g:haddock_browser_callformat="%s %s"
 let g:haskellmode_completion_ghc = 0
@@ -195,9 +207,9 @@ augroup haskellGrp
     autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
     " au BufWritePost *.hs :Neomake
 augroup END
-" }}}
+"
 
-" Purescript Setup ------ {{{
+" Purescript Setup ------
 let g:psc_ide_syntastic_mode= 1
 let g:psc_ide_log_level= 0
 let g:psc_ide_server_runner=["yarn", "--silent", "purs"]
@@ -215,9 +227,9 @@ augroup purescriptGrp
     au FileType purescript nnoremap <buffer> <localleader>b !yarn pulp build<CR>
     autocmd FileType purescript setlocal omnifunc=PSCIDEomni
 augroup END
-" }}}
+"
 
-" Javascript Setup ------- {{{
+" Javascript Setup -------
 augroup javascriptGrp
     autocmd!
     au FileType javascript nnoremap <buffer> <leader>=>  :<c-u>normal! F(i function <esc> f)a{<cr><cr>}<esc>ka<tab><cr>
@@ -231,29 +243,33 @@ augroup typescriptGrp
     autocmd FileType typescript nmap <buffer> <localleader>r :<C-u>echo tsuquyomi#hint()<CR>
     autocmd FileType typescript nnoremap <localleader>c :exec "!tsc"<cr>:exec "!webpack"<cr>:exec "redraw!"<cr>
 augroup END
-" }}}
+"
 
-" Rust Setup ---------- {{{
+" Rust Setup ----------
 augroup rustGrp
     autocmd!
 augroup END
-" }}}
+"
 
-" Markdown Setup ------- {{{
+" Markdown Setup -------
 augroup markdownGrp
     autocmd!
 augroup END
-" }}}
+"
 
-" Vimscript Setup --------- {{{
+" Vimscript Setup ---------
 augroup vimscriptGrp
     autocmd!
     autocmd FileType vim setlocal foldmethod=marker
 augroup END
 
-" }}}
+"
 
-"Register deoplete -------- {{{
+" F# Setup ------------
+let g:fsharp_only_check_errors_on_write = 1
+
+
+"Register deoplete --------
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#complete_method = "omnifunc"
 if !exists('g:deoplete#omni#input_patterns')

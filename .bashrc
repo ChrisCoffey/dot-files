@@ -55,7 +55,12 @@ alias sghci-core="stack ghci --ghci-options -ddump-simpl \
 alias pb="yarn run pulp build"
 alias pr="yarn run start"
 
-alias startpsql=' postgres -D /Users/ccoffey/bin/pgData/'
+#########################
+### Postgres          ###
+#########################
+export PATH=$PATH:/usr/local/Cellar/postgresql@9.6/9.6.9/bin
+
+alias startpsql='pg_ctl -D /Users/ccoffey/bin/pgData/ start'
 
 #########################
 ### Path Variables    ###
@@ -73,13 +78,16 @@ export PATH=$PATH:$SCALA_HOME/bin
 export PATH=$PATH:/Users/ccoffey/bin
 export PATH=$PATH:/Users/ccoffey/.local/bin
 export PATH=$PATH:/Users/ccoffey/bin/bootScripts/git
-export PATH=$PATH:/usr/local/bin
 export PATH=$PATH:/Users/ccoffey/bin/s3cmd-1.5.0-rc1
 export PATH=~/bin/spark-1.2.1-bin-hadoop2.4/bin:$PATH
 export PATH=~/3rdParty/phantomjs/bin/:$PATH
 export PATH=$GEM_HOME:$PATH
 export PATH=$RABBIT_HOME:$PATH
 export PATH=$PATH:/Users/ccoffey/.stack/programs/x86_64-osx/ghc-8.0.1/bin/ghc
+export PATH=$PATH:/usr/local/share/dotnet
+
+## Ensure programs installed by brew are given preference, unless otherwise specified
+export PATH=/usr/local/bin:$PATH
 
 export LDFLAGS="-L/usr/local/opt/llvm/lib"
 export CPPFLAGS="-I/usr/local/opt/llvm/include"
