@@ -1,139 +1,140 @@
-ammonite-repl
-ansible
-autoconf
-automake
-awscli
-bash
-bash-completion
-boost
-cabal-install
-cassandra
-cgal
-cmake
-cocoapods
-ctags
-docker
-docker-compose
-docker-machine
-elasticsearch
-emacs
-erlang
-fig
-flow
-fontconfig
-freetds
-freetype
-freexl
-fswatch
-gcc
-gd
-gdal
-gdbm
-geos
-gettext
-ghc
-ghi
-ghostscript
-giflib
-git
-giter8
-gmp
-gnupg
-gnuplot
-go
-gpp
-gradle
-grafana
-graphviz
-haskell-stack
-heroku
-heroku-node
-hubflow
-hugo
-icu4c
-isl
-jemalloc
-jpeg
-jq
-json-c
-keybase
-kibana
-leiningen
-libffi
-libgeotiff
-liblwgeom
-libmpc
-libpng
-libspatialite
-libtermkey
-libtiff
-libtool
-libuv
-libvterm
-libxml2
-libyaml
-little-cms2
-llvm
-lua
-lzlib
-lzo
-makedepend
-mit-scheme
-mongodb
-mono
-mpfr
-msgpack
-mysql
-nailgun
-neovim
-netcat
-node
-oniguruma
-openssl
-openssl@1.1
-openvpn
-pcre
-perl
-php70
-php@7.0
-phpunit
-pkg-config
-postgis
-postgresql
-postgresql@9.6
-proj
-purescript
-pyenv
-python
-python3
-rabbitmq
-readline
-redis
-ruby
-sbt
-sfcgal
-solr36
-sphinx-doc
-sqlite
-sqsh
-terraform
-tree
-ucl
-unibilium
-unixodbc
-upx
-vim
-watch
-watchman
-webp
-wget
-wxmac
-xz
-yarn
-cocoapods
-haskell-platform
-jet
-mactex
-tuntap
-vagrant
-xquartz
+#! /bin/bash
+brew install ammonite-repl
+brew install ansible
+brew install autoconf
+brew install automake
+brew install awscli
+brew install bash
+brew install bash-completion
+brew install boost
+brew install cabal-install
+brew install cassandra
+brew install cgal
+brew install cmake
+brew install cocoapods
+brew install ctags
+brew install docker
+brew install docker-compose
+brew install docker-machine
+brew install elasticsearch
+brew install emacs
+brew install erlang
+brew install fig
+brew install flow
+brew install fontconfig
+brew install freetds
+brew install freetype
+brew install freexl
+brew install fswatch
+brew install gcc
+brew install gd
+brew install gdal
+brew install gdbm
+brew install geos
+brew install gettext
+brew install ghc
+brew install ghi
+brew install ghostscript
+brew install giflib
+brew install git
+brew install giter8
+brew install gmp
+brew install gnupg
+brew install gnuplot
+brew install go
+brew install gpp
+brew install gradle
+brew install grafana
+brew install graphviz
+brew install haskell-stack
+brew install heroku
+brew install heroku-node
+brew install hubflow
+brew install hugo
+brew install icu4c
+brew install isl
+brew install jemalloc
+brew install jpeg
+brew install jq
+brew install json-c
+brew install keybase
+brew install kibana
+brew install leiningen
+brew install libffi
+brew install libgeotiff
+brew install liblwgeom
+brew install libmpc
+brew install libpng
+brew install libspatialite
+brew install libtermkey
+brew install libtiff
+brew install libtool
+brew install libuv
+brew install libvterm
+brew install libxml2
+brew install libyaml
+brew install little-cms2
+brew install llvm
+brew install lua
+brew install lzlib
+brew install lzo
+brew install makedepend
+brew install mit-scheme
+brew install mongodb
+brew install mono
+brew install mpfr
+brew install msgpack
+brew install mysql
+brew install nailgun
+brew install neovim
+brew install netcat
+brew install node
+brew install oniguruma
+brew install openssl
+brew install openssl@1.1
+brew install openvpn
+brew install pcre
+brew install perl
+brew install php70
+brew install php@7.0
+brew install phpunit
+brew install pkg-config
+brew install postgis
+brew install postgresql
+brew install postgresql@9.6
+brew install proj
+brew install purescript
+brew install pyenv
+brew install python
+brew install python3
+brew install rabbitmq
+brew install readline
+brew install redis
+brew install ruby
+brew install sbt
+brew install sfcgal
+brew install solr36
+brew install sphinx-doc
+brew install sqlite
+brew install sqsh
+brew install terraform
+brew install tree
+brew install ucl
+brew install unibilium
+brew install unixodbc
+brew install upx
+brew install vim
+brew install watch
+brew install watchman
+brew install webp
+brew install wget
+brew install wxmac
+brew install xz
+brew cask install yarn
+brew cask install cocoapods
+brew cask install haskell-platform
+brew cask install jet
+brew cask install mactex
+brew cask install tuntap
+brew cask install vagrant
+brew cask install xquartz

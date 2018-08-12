@@ -1,7 +1,7 @@
 set mouse=a
 " Plug Init -----
 call plug#begin()
-
+let curdir = expand('<sfile>:p:h')
 
 " General
 Plug 'VundleVim/Vundle.vim'
@@ -21,6 +21,13 @@ Plug 'mtth/scratch.vim'
 Plug 'shougo/deoplete.nvim'
 Plug 'rizzatti/dash.vim'
 Plug 'altercation/vim-colors-solarized'
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+
+" (Optional) Multi-entry selection UI.
+Plug 'junegunn/fzf'
 
 " Haskell
 Plug 'eagletmt/ghcmod-vim'
@@ -68,8 +75,6 @@ filetype plugin indent on
 syntax on
 
 let g:scratch_horizontal=0
-let g:deoplete#max_abbr_width=120
-let g:deoplete#max_menu_width=120
 set updatetime=250
 "set shell=bash\ -i
 
@@ -161,6 +166,21 @@ let g:syntastic_javascript_checkers = ['eslint']
 
 "
 
+" LanguageClient Setup
+set hidden
+
+let g:LanguageClient_devel = 1
+let g:LanguageClient_loggingFile = '~/.local/LanguageClient.log'
+let g:LanguageClient_loggingLevel = 'INFO'
+let g:LanguageClient_serverStderr = '~/local/LanguageServer.log'
+let g:LanguageClient_selectionUI = 'location-list'
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+    \ 'haskell': ['~/.local/bin/hie-wrapper', '-r', curdir]
+    \ }
+
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+
 " Ensime ---------
 augroup scalaGrp
     autocmd!
@@ -191,6 +211,7 @@ let g:haddock_browser="open"
 let g:haddock_browser_callformat="%s %s"
 let g:haskellmode_completion_ghc = 0
 let g:necoghc_enable_detailed_browse = 1
+set iskeyword=a-z,A-Z,_,.,39
 augroup haskellGrp
     autocmd!
     au FileType haskell nnoremap <buffer> <localleader>t :InteroGenericType<CR>
@@ -203,6 +224,10 @@ augroup haskellGrp
     au FileType haskell nnoremap <buffer> <localleader>f :InteroInfo<CR>
     au FileType haskell nnoremap <buffer> <localleader>lp :execute "normal! ggi{-# LANGUAGE #-}\<cr>\<esc>kfEa"
     au FileType haskell nnoremap <buffer> <localleader>a :GhcModCheckAndLintAsync<CR>
+
+    " Update my tags files
+    au BufWritePost *.hs silent !init-tags %
+    au BufWritePost *.hsc silent !init-tags %
 
     autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
     " au BufWritePost *.hs :Neomake
@@ -272,6 +297,8 @@ let g:fsharp_only_check_errors_on_write = 1
 "Register deoplete --------
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#complete_method = "omnifunc"
+let g:deoplete#max_abbr_width=120
+let g:deoplete#max_menu_width=120
 if !exists('g:deoplete#omni#input_patterns')
     let g:deoplete#omni#input_patterns = {}
 endif
