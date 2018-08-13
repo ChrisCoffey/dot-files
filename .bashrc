@@ -76,8 +76,8 @@ export NVM_HOME="$HOME/.nvm"
 
 export PATH=$PATH:$SCALA_HOME
 export PATH=$PATH:$SCALA_HOME/bin
-export PATH=$PATH:/Users/chriscoffey/bin
-export PATH=$PATH:/Users/chriscoffey/.local/bin
+export PATH=/Users/chriscoffey/bin:$PATH
+export PATH=/Users/chriscoffey/.local/bin:$PATH
 export PATH=$PATH:/Users/chriscoffey/bin/bootScripts/git
 export PATH=$PATH:/Users/chriscoffey/bin/s3cmd-1.5.0-rc1
 export PATH=~/bin/spark-1.2.1-bin-hadoop2.4/bin:$PATH

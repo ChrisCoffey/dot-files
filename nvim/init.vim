@@ -1,7 +1,7 @@
 set mouse=a
 " Plug Init -----
 call plug#begin()
-let curdir = expand('<sfile>:p:h')
+let curdir = getcwd()
 
 " General
 Plug 'VundleVim/Vundle.vim'
@@ -33,7 +33,7 @@ Plug 'junegunn/fzf'
 Plug 'eagletmt/ghcmod-vim'
 Plug 'eagletmt/neco-ghc'
 Plug 'bitc/vim-hdevtools'
-Plug 'parsonsmatt/intero-neovim'
+" Plug 'parsonsmatt/intero-neovim'
 
 " Purescript
 Plug 'frigoeu/psc-ide-vim'
@@ -170,13 +170,13 @@ let g:syntastic_javascript_checkers = ['eslint']
 set hidden
 
 let g:LanguageClient_devel = 1
-let g:LanguageClient_loggingFile = '~/.local/LanguageClient.log'
+let g:LanguageClient_loggingFile = 'tmp/LanguageClient.log'
 let g:LanguageClient_loggingLevel = 'INFO'
-let g:LanguageClient_serverStderr = '~/local/LanguageServer.log'
+let g:LanguageClient_serverStderr = '/tmp/LanguageServer.log'
 let g:LanguageClient_selectionUI = 'location-list'
 let g:LanguageClient_serverCommands = {
     \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-    \ 'haskell': ['~/.local/bin/hie-wrapper', '-r', curdir]
+    \ 'haskell': ['~/.local/bin/hie-wrapper', '-r', curdir, '-d']
     \ }
 
 nnoremap <F5> :call LanguageClient_contextMenu()<CR>
@@ -217,13 +217,13 @@ augroup haskellGrp
     au FileType haskell nnoremap <buffer> <localleader>t :InteroGenericType<CR>
     au FileType haskell nnoremap <buffer> <localleader>o :InteroOpen<CR>
     au FileType haskell nnoremap <buffer> <localleader>h :InteroHide<CR>
-    au FileType haskell nnoremap <buffer> <localleader>r :HdevtoolsClear<CR>
-    au FileType haskell nnoremap <buffer> <localleader>l :GhcModLint<CR>
-    au FileType haskell nnoremap <buffer> <localleader>e :GhcModExpand<CR>
-    au FileType haskell nnoremap <buffer> <localleader>d :GhcModSigCodegen<CR>
-    au FileType haskell nnoremap <buffer> <localleader>f :InteroInfo<CR>
-    au FileType haskell nnoremap <buffer> <localleader>lp :execute "normal! ggi{-# LANGUAGE #-}\<cr>\<esc>kfEa"
-    au FileType haskell nnoremap <buffer> <localleader>a :GhcModCheckAndLintAsync<CR>
+    "au FileType haskell nnoremap <buffer> <localleader>r :HdevtoolsClear<CR>
+    "au FileType haskell nnoremap <buffer> <localleader>l :GhcModLint<CR>
+    "au FileType haskell nnoremap <buffer> <localleader>e :GhcModExpand<CR>
+    "au FileType haskell nnoremap <buffer> <localleader>d :GhcModSigCodegen<CR>
+    au FileType haskell nnoremap <buffer> <localleader>f :call LanguageClient_textDocument_hover()<CR>
+    "au FileType haskell nnoremap <buffer> <localleader>lp :execute "normal! ggi{-# LANGUAGE #-}\<cr>\<esc>kfEa"
+    "au FileType haskell nnoremap <buffer> <localleader>a :GhcModCheckAndLintAsync<CR>
 
     " Update my tags files
     au BufWritePost *.hs silent !init-tags %
