@@ -53,7 +53,7 @@ Plug 'fsharp/vim-fsharp', {
       \}
 
 " Python
-Plug 'klen/python-mode'
+" Plug 'klen/python-mode'
 
 " Javascript
 " Plug 'wookiehangover/jshint.vim'
@@ -169,14 +169,16 @@ let g:syntastic_javascript_checkers = ['eslint']
 " LanguageClient Setup
 set hidden
 
-let g:LanguageClient_devel = 1
-let g:LanguageClient_loggingFile = 'tmp/LanguageClient.log'
+let g:LanguageClient_devel = 0
+let g:LanguageClient_loggingFile = '/tmp/LanguageClient.log'
 let g:LanguageClient_loggingLevel = 'INFO'
 let g:LanguageClient_serverStderr = '/tmp/LanguageServer.log'
 let g:LanguageClient_selectionUI = 'location-list'
 let g:LanguageClient_serverCommands = {
     \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-    \ 'haskell': ['~/.local/bin/hie-wrapper', '-r', curdir, '-d']
+    \ 'haskell': ['~/.local/bin/hie-wrapper', '-r', curdir, '-d'],
+    \ 'javascript': ['javascript-typescript-langserver'],
+    \ 'python': ['pyls']
     \ }
 
 nnoremap <F5> :call LanguageClient_contextMenu()<CR>
