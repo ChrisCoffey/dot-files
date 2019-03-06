@@ -20,11 +20,14 @@ Plug 'scrooloose/nerdtree'
 Plug 'mtth/scratch.vim'
 Plug 'shougo/deoplete.nvim'
 Plug 'rizzatti/dash.vim'
+Plug 'junegunn/fzf'
 Plug 'altercation/vim-colors-solarized'
+Plug 'elixir-editors/vim-elixir'
 Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
     \ }
+" Plug 'w0rp/ale'
 
 " (Optional) Multi-entry selection UI.
 Plug 'junegunn/fzf'
@@ -80,7 +83,7 @@ set updatetime=250
 
 set spelllang=en_us
 set number numberwidth=2
-set tags=./.tags,.tags,./tags,tags
+set tags=./.tags,.tags,./tags,tags;/
 set tabstop=4 softtabstop=4 expandtab shiftwidth=4 smarttab shiftround
 set nowrap
 
@@ -106,7 +109,8 @@ nnoremap <leader>wl <c-w>l
 nnoremap <leader>wh <c-w>h
 nnoremap <leader>wj <c-w>j
 nnoremap <leader>wk <c-w>k
-nnoremap <leader>tt :tabn<cr>
+nnoremap <leader>0 :tabn<cr>
+nnoremap <leader>1 :tabp<cr>
 nnoremap <leader>a :b#<cr>
 inoremap ooo <c-x><c-o>
 "
@@ -168,6 +172,7 @@ let g:syntastic_javascript_checkers = ['eslint']
 
 " LanguageClient Setup
 set hidden
+" let g:ale_elixir_elixir_ls_release = '/Users/chriscoffey/workspace/open_source/elixir-ls/rel'
 
 let g:LanguageClient_devel = 0
 let g:LanguageClient_loggingFile = '/tmp/LanguageClient.log'
@@ -178,9 +183,31 @@ let g:LanguageClient_serverCommands = {
     \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
     \ 'haskell': ['~/.local/bin/hie-wrapper', '-r', curdir, '-d'],
     \ 'javascript': ['javascript-typescript-langserver'],
-    \ 'python': ['pyls']
+    \ 'python': ['pyls'],
+    \ 'elixir': ['~/workspace/open_source/elixir-ls/rel/language_server.sh'],
+    \ 'purescript': ['npx purescript-language-server --stdio']
     \ }
 
+"" Ale language client
+" let g:ale_completion_enabled = 1
+" let g:ale_fix_on_save = 1
+
+"augroup aleGrp
+"    nnoremap <buffer> <localleader>d :ALEGoToDefinition
+"    nnoremap <buffer> <localleader>r :ALEFindReferences
+"    nnoremap <buffer> <localleader>e :ALEHover
+"
+"augroup END
+
+
+
+" By default don't consider '.' as part of a word, but enable it using
+" <leader>j to allow qualfied name lookups in lsp servers
+set iskeyword=a-z,A-Z,_,39
+nnoremap <leader>k :set iskeyword=a-z,A-Z,_,39
+nnoremap <leader>j :set iskeyword=a-z,A-Z,_,.,39
+
+nnoremap <localleader>f :call LanguageClient_textDocument_hover()<CR>
 nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 
 " Ensime ---------
@@ -213,7 +240,6 @@ let g:haddock_browser="open"
 let g:haddock_browser_callformat="%s %s"
 let g:haskellmode_completion_ghc = 0
 let g:necoghc_enable_detailed_browse = 1
-set iskeyword=a-z,A-Z,_,.,39
 augroup haskellGrp
     autocmd!
     au FileType haskell nnoremap <buffer> <localleader>t :InteroGenericType<CR>
@@ -223,7 +249,7 @@ augroup haskellGrp
     "au FileType haskell nnoremap <buffer> <localleader>l :GhcModLint<CR>
     "au FileType haskell nnoremap <buffer> <localleader>e :GhcModExpand<CR>
     "au FileType haskell nnoremap <buffer> <localleader>d :GhcModSigCodegen<CR>
-    au FileType haskell nnoremap <buffer> <localleader>f :call LanguageClient_textDocument_hover()<CR>
+    "au FileType haskell nnoremap <buffer> <localleader>f :call LanguageClient_textDocument_hover()<CR>
     "au FileType haskell nnoremap <buffer> <localleader>lp :execute "normal! ggi{-# LANGUAGE #-}\<cr>\<esc>kfEa"
     "au FileType haskell nnoremap <buffer> <localleader>a :GhcModCheckAndLintAsync<CR>
 
