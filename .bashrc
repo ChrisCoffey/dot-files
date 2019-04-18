@@ -4,6 +4,7 @@
 #
 ###########
 ulimit -n 4096
+export PS1="ccoffey-work λ"
 
 alias ..="cd .."
 alias ...=".. && .."
@@ -38,7 +39,7 @@ alias hdc='killall hdevtools'
 ##########################
 alias hb="stack build"
 alias hbd="stack build --haddock --no-haddock-deps --haddock-internal"
-alias hbl="stack build .."
+alias hbt="stack build --test --no-run-tests --fast"
 alias sghci="stack ghci"
 alias sghc="stack ghc"
 alias hdevtools='stack exec --no-ghc-package-path --package hdevtools hdevtools --'

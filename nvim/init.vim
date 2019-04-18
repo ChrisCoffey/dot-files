@@ -56,7 +56,7 @@ Plug 'fsharp/vim-fsharp', {
       \}
 
 " Python
-" Plug 'klen/python-mode'
+Plug 'klen/python-mode'
 
 " Javascript
 " Plug 'wookiehangover/jshint.vim'
@@ -86,6 +86,7 @@ set number numberwidth=2
 set tags=./.tags,.tags,./tags,tags;/
 set tabstop=4 softtabstop=4 expandtab shiftwidth=4 smarttab shiftround
 set nowrap
+" set colorcolumn=100
 
 set statusline+=%#warningmsg#
 set statusline+=%*
@@ -242,16 +243,10 @@ let g:haskellmode_completion_ghc = 0
 let g:necoghc_enable_detailed_browse = 1
 augroup haskellGrp
     autocmd!
-    au FileType haskell nnoremap <buffer> <localleader>t :InteroGenericType<CR>
-    au FileType haskell nnoremap <buffer> <localleader>o :InteroOpen<CR>
-    au FileType haskell nnoremap <buffer> <localleader>h :InteroHide<CR>
-    "au FileType haskell nnoremap <buffer> <localleader>r :HdevtoolsClear<CR>
-    "au FileType haskell nnoremap <buffer> <localleader>l :GhcModLint<CR>
-    "au FileType haskell nnoremap <buffer> <localleader>e :GhcModExpand<CR>
-    "au FileType haskell nnoremap <buffer> <localleader>d :GhcModSigCodegen<CR>
-    "au FileType haskell nnoremap <buffer> <localleader>f :call LanguageClient_textDocument_hover()<CR>
-    "au FileType haskell nnoremap <buffer> <localleader>lp :execute "normal! ggi{-# LANGUAGE #-}\<cr>\<esc>kfEa"
-    "au FileType haskell nnoremap <buffer> <localleader>a :GhcModCheckAndLintAsync<CR>
+    hi link ALEError Error
+    hi Warning term=underline cterm=underline ctermfg=Yellow gui=undercurl guisp=Gold
+    hi link ALEWarning Warning
+    hi link ALEInfo SpellCap
 
     " Update my tags files
     au BufWritePost *.hs silent !init-tags %
