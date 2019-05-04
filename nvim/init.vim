@@ -34,7 +34,7 @@ Plug 'junegunn/fzf'
 
 " Haskell
 Plug 'eagletmt/ghcmod-vim'
-Plug 'eagletmt/neco-ghc'
+" Plug 'eagletmt/neco-ghc'
 Plug 'bitc/vim-hdevtools'
 " Plug 'parsonsmatt/intero-neovim'
 
@@ -236,6 +236,9 @@ augroup parensGrp
 augroup END
 "
 
+set iskeyword=a-z,A-Z,_,.,39
+nnoremap <leader>k :set iskeyword=a-z,A-Z,_,39<CR>
+nnoremap <leader>j :set iskeyword=a-z,A-Z,_,.,39<CR>
 " Haskell Setup -------
 let g:haddock_browser="open"
 let g:haddock_browser_callformat="%s %s"
@@ -247,6 +250,12 @@ augroup haskellGrp
     hi Warning term=underline cterm=underline ctermfg=Yellow gui=undercurl guisp=Gold
     hi link ALEWarning Warning
     hi link ALEInfo SpellCap
+    au FileType haskell nnoremap <buffer> <localleader>lg :call LanguageClient#textDocument_definition()<CR>
+    au FileType haskell nnoremap <buffer> <localleader>lr :call LanguageClient#textDocument_rename()<CR>
+    au FileType haskell nnoremap <buffer> <localleader>lf :call LanguageClient#textDocument_formatting()<CR>
+    au FileType haskell nnoremap <buffer> <localleader>lb :call LanguageClient#textDocument_references()<CR>
+    au FileType haskell nnoremap <buffer> <localleader>la :call LanguageClient#textDocument_codeAction()<CR>
+    au FileType haskell nnoremap <buffer> <localleader>ls :call LanguageClient#textDocument_documentSymbol()<CR>
 
     " Update my tags files
     au BufWritePost *.hs silent !init-tags %
@@ -265,7 +274,7 @@ let g:purescript_indent_let = 0
 let g:purescript_indent_where = 0
 let g:purescript_indent_dot = 0
 augroup purescriptGrp
-    autocmd!
+    au!
     au FileType purescript nnoremap <buffer> <localleader>t :Ptype<CR>
     au FileType purescript nnoremap <buffer> <localleader>an :PaddType<CR>
     au FileType purescript nnoremap <buffer> <localleader>gt :Pgoto<CR>
@@ -302,6 +311,8 @@ augroup END
 " Markdown Setup -------
 augroup markdownGrp
     autocmd!
+    set spell
+    au FileType markdown inoremap .. .\r
 augroup END
 "
 
@@ -330,4 +341,6 @@ let startHour = strftime('%H')
 if (startHour > 7) && (startHour < 16)
     :exec "colorscheme solarized"
 endif
+
+
 

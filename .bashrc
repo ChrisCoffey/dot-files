@@ -37,8 +37,8 @@ alias hdc='killall hdevtools'
 ##########################
 ### Haskell Aliases   ####
 ##########################
-alias hb="stack build"
-alias hbd="stack build --haddock --no-haddock-deps --haddock-internal"
+alias hb="stack build --fast --test --no-run-tests"
+alias hbd="stack build --fast --haddock --no-haddock-deps --haddock-internal"
 alias hbt="stack build --test --no-run-tests --fast"
 alias sghci="stack ghci"
 alias sghc="stack ghc"
@@ -51,7 +51,7 @@ alias sghci-core="stack ghci --ghci-options -ddump-simpl \
      --ghci-options -dsuppress-module-prefixes"
 
 ##########################
-### Purescript Aliases   ####
+### Purescript Aliases ###
 ##########################
 alias pb="yarn run pulp build"
 alias pr="yarn run start"
@@ -61,13 +61,13 @@ alias pr="yarn run start"
 #########################
 export PATH=$PATH:/usr/local/Cellar/postgresql@9.6/9.6.9/bin
 
-alias startpsql='pg_ctl -D /Users/chriscoffey/bin/pgData/ start'
+alias startpsql='pg_ctl -D /Users/ccoffey/bin/pgData/ start'
 
 #########################
 ### Path Variables    ###
 #########################
-export WS="/Users/chriscoffey/workspace"
-export SCALA_HOME="/Users/chriscoffey/bin/scala_current"
+export WS="/Users/ccoffey/workspace"
+export SCALA_HOME="/Users/ccoffey/bin/scala_current"
 export JAVA_HOME=$(/usr/libexec/java_home -v 1.8.0_05)
 export JAVA_OPTIONS="-Xms64m -Xmx4G -Xss2m -XX:MaxPermSize=2G"
 export SBT_OPTS="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=9999"
@@ -77,15 +77,14 @@ export NVM_HOME="$HOME/.nvm"
 
 export PATH=$PATH:$SCALA_HOME
 export PATH=$PATH:$SCALA_HOME/bin
-export PATH=/Users/chriscoffey/bin:$PATH
-export PATH=/Users/chriscoffey/.local/bin:$PATH
-export PATH=$PATH:/Users/chriscoffey/bin/bootScripts/git
-export PATH=$PATH:/Users/chriscoffey/bin/s3cmd-1.5.0-rc1
+export PATH=/Users/ccoffey/bin:$PATH
+export PATH=/Users/ccoffey/.local/bin:$PATH
+export PATH=$PATH:/Users/ccoffey/bin/s3cmd-1.5.0-rc1
 export PATH=~/bin/spark-1.2.1-bin-hadoop2.4/bin:$PATH
 export PATH=~/3rdParty/phantomjs/bin/:$PATH
 export PATH=$GEM_HOME:$PATH
 export PATH=$RABBIT_HOME:$PATH
-export PATH=$PATH:/Users/chriscoffey/.stack/programs/x86_64-osx/ghc-8.0.1/bin/ghc
+export PATH=$PATH:/Users/ccoffey/.stack/programs/x86_64-osx/ghc-8.0.1/bin/ghc
 export PATH=$PATH:/usr/local/share/dotnet
 
 ## Ensure programs installed by brew are given preference, unless otherwise specified
@@ -95,8 +94,12 @@ export LDFLAGS="-L/usr/local/opt/llvm/lib"
 export CPPFLAGS="-I/usr/local/opt/llvm/include"
 
 ########################
+### Git              ###
+########################
 
+export PATH=$PATH:/Users/ccoffey/bin/bootScripts/git
 source ~/bin/bootScripts/git/gitFuncs.sh
+export REVIEW_BASE=master # Used in some git aliases
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
