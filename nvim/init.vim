@@ -149,8 +149,8 @@ au BufWritePre * call DeleteTrailingWS()
 "}}}
 "
 "Search mapping ---------
-  nnoremap <leader>t :NERDTreeToggle<cr>
-
+nnoremap <leader>t :NERDTreeToggle<cr>
+nnoremap ff :FZF<cr>
 
 " Plugin mappings -------
 "
@@ -158,6 +158,7 @@ au BufWritePre * call DeleteTrailingWS()
 "Syntastic setup -------
 set statusline+=%{SyntasticStatuslineFlag()}
 let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_ruby_checkers = ['bundle exec rubocop', 'bundle exec mri']
 "
 
 " Neomake setup --------
@@ -186,7 +187,8 @@ let g:LanguageClient_serverCommands = {
     \ 'javascript': ['javascript-typescript-langserver'],
     \ 'python': ['pyls'],
     \ 'elixir': ['~/workspace/open_source/elixir-ls/rel/language_server.sh'],
-    \ 'purescript': ['npx purescript-language-server --stdio']
+    \ 'purescript': ['npx purescript-language-server --stdio'],
+    \ 'ruby': ['tcp://localhost:7658']
     \ }
 
 "" Ale language client
@@ -308,11 +310,24 @@ augroup rustGrp
 augroup END
 "
 
+" Ruby Setup
+function! RubocopAutocorrect()
+  execute "!bundle exec bundle exec rubocop -a " . bufname("%")
+  call SyntasticCheck()
+endfunction
+
+augroup rubyGrp
+    au FileType ruby setlocal tabstop=2 softtabstop=2 shiftwidth=2
+    au FileType ruby nnoremap <buffer> <localleader>cop :call RubocopAutocorrect()<cr>
+augroup END
+
+"
+
 " Markdown Setup -------
 augroup markdownGrp
     autocmd!
-    set spell
-    au FileType markdown inoremap .. .\r
+    au FileType markdown set spell
+    " au FileType markdown inoremap .. .\r
 augroup END
 "
 
@@ -341,6 +356,3 @@ let startHour = strftime('%H')
 if (startHour > 7) && (startHour < 16)
     :exec "colorscheme solarized"
 endif
-
-
-

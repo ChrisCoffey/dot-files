@@ -4,7 +4,8 @@
 #
 ###########
 ulimit -n 4096
-export PS1="ccoffey-work λ"
+export PS1="\W λ "
+export PS1="\W\[\033[32m\]\$(parse_git_branch)\[\033[00m\] λ "
 
 alias ..="cd .."
 alias ...=".. && .."
@@ -59,33 +60,33 @@ alias pr="yarn run start"
 #########################
 ### Postgres          ###
 #########################
-export PATH=$PATH:/usr/local/Cellar/postgresql@9.6/9.6.9/bin
+export PATH=$PATH:/usr/local/Cellar/postgresql@9.6/9.6.9/bin/
 
-alias startpsql='pg_ctl -D /Users/ccoffey/bin/pgData/ start'
+alias startpsql='pg_ctl -D /bin/pgData/ start'
 
 #########################
 ### Path Variables    ###
 #########################
-export WS="/Users/ccoffey/workspace"
-export SCALA_HOME="/Users/ccoffey/bin/scala_current"
+export WS="/workspace"
+export SCALA_HOME="/bin/scala_current"
 export JAVA_HOME=$(/usr/libexec/java_home -v 1.8.0_05)
 export JAVA_OPTIONS="-Xms64m -Xmx4G -Xss2m -XX:MaxPermSize=2G"
 export SBT_OPTS="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=9999"
-export GEM_HOME=/usr/local/bin/ruby/2.0.0/gems
+export GEM_HOME=/usr/local/bin/ruby/2.0.0/gems/
 export RABBIT_HOME=/usr/local/Cellar/rabbitmq/3.6.6/sbin
 export NVM_HOME="$HOME/.nvm"
 
 export PATH=$PATH:$SCALA_HOME
 export PATH=$PATH:$SCALA_HOME/bin
-export PATH=/Users/ccoffey/bin:$PATH
-export PATH=/Users/ccoffey/.local/bin:$PATH
-export PATH=$PATH:/Users/ccoffey/bin/s3cmd-1.5.0-rc1
-export PATH=~/bin/spark-1.2.1-bin-hadoop2.4/bin:$PATH
+export PATH=/bin:$PATH
+export PATH=$PATH:/bin/s3cmd-1.5.0-rc1
+export PATH=~/bin/spark-1.2.1-bin-hadoop2.4/bin/:$PATH
 export PATH=~/3rdParty/phantomjs/bin/:$PATH
 export PATH=$GEM_HOME:$PATH
 export PATH=$RABBIT_HOME:$PATH
-export PATH=$PATH:/Users/ccoffey/.stack/programs/x86_64-osx/ghc-8.0.1/bin/ghc
+export PATH=$PATH:/.stack/programs/x86_64-osx/ghc-8.0.1/bin/ghc
 export PATH=$PATH:/usr/local/share/dotnet
+export PATH=~/.local/bin:$PATH
 
 ## Ensure programs installed by brew are given preference, unless otherwise specified
 export PATH=/usr/local/bin:$PATH
@@ -97,10 +98,20 @@ export CPPFLAGS="-I/usr/local/opt/llvm/include"
 ### Git              ###
 ########################
 
-export PATH=$PATH:/Users/ccoffey/bin/bootScripts/git
+export PATH=$PATH:/bin/bootScripts/git/
 source ~/bin/bootScripts/git/gitFuncs.sh
 export REVIEW_BASE=master # Used in some git aliases
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+########################
+### Ruby             ###
+########################
+# Add 'rbenv' to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+alias be="bundle exec"
+alias bo="BUNDLER_EDITOR=nvim bundler open "
+alias nuke="bundle exec db:drop db:create db:migrate RAILS_ENV="

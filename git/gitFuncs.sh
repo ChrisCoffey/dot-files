@@ -8,15 +8,13 @@ parse_git_branch() {
 
     }
 
-export PS1="\u@\h \W\[\033[32m\]\$(parse_git_branch)\[\033[00m\] $ "
-
 function gwl(){
-  Command="git branch --merged master | grep -v master " 
-  
+  Command="git branch --merged master | grep -v master "
+
   if [ "$1" == "d" ]; then
     Command+="| xargs -I % sh -c 'git branch -D %; git push origin --delete %;'"
   fi;
- 
+
   eval "$Command && git fetch --prune origin"
 }
 
