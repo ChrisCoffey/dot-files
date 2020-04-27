@@ -191,6 +191,8 @@ let g:LanguageClient_serverCommands = {
     \ 'ruby': ['tcp://localhost:7658']
     \ }
 
+nnoremap <localleader>f :call LanguageClient_textDocument_hover()<CR>
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 "" Ale language client
 " let g:ale_completion_enabled = 1
 " let g:ale_fix_on_save = 1
@@ -202,16 +204,12 @@ let g:LanguageClient_serverCommands = {
 "
 "augroup END
 
-
-
 " By default don't consider '.' as part of a word, but enable it using
 " <leader>j to allow qualfied name lookups in lsp servers
 set iskeyword=a-z,A-Z,_,39
 nnoremap <leader>k :set iskeyword=a-z,A-Z,_,39
 nnoremap <leader>j :set iskeyword=a-z,A-Z,_,.,39
 
-nnoremap <localleader>f :call LanguageClient_textDocument_hover()<CR>
-nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 
 " Ensime ---------
 augroup scalaGrp
