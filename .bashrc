@@ -4,8 +4,7 @@
 #
 ###########
 ulimit -n 4096
-export PS1="\W λ "
-export PS1="\W\[\033[32m\]\$(parse_git_branch)\[\033[00m\] λ "
+export PS1="\W \t \[\033[32m\]\033\$(parse_git_branch)\[\033[00m\] λ "
 
 alias ..="cd .."
 alias ...=".. && .."
