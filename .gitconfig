@@ -46,6 +46,7 @@
     # Checkout master and rebase on remote
     gcrm = !git gcr master
     gcr = !git checkout $1 && git rebase -i origin/master
+    po = !git push origin $(git rev-parse --abbrev-ref HEAD)
 
 
 [github]
