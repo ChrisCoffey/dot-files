@@ -352,5 +352,6 @@ endif
 
 let startHour = strftime('%H')
 if (startHour > 7) && (startHour < 16)
+    :exec "set background=light"
     :exec "colorscheme solarized"
 endif

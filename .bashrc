@@ -34,6 +34,7 @@ alias szs="~/bin/bootScripts/scalazS.sh"
 alias genny="/Applications/Genymotion\ Shell.app/Contents/MacOS/gennyshell"
 alias rmorig='find ./ -name "*.orig" -delete'
 alias hdc='killall hdevtools'
+alias dpj='git checkout -- **/purs/package-lock.json'
 
 ##########################
 ### Haskell Aliases   ####
@@ -115,3 +116,4 @@ eval "$(rbenv init -)"
 alias be="bundle exec"
 alias bo="BUNDLER_EDITOR=nvim bundler open "
 alias nuke="bundle exec rake db:drop db:create db:migrate "
+export PATH="/usr/local/opt/node@12/bin:$PATH"
