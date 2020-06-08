@@ -236,9 +236,6 @@ augroup parensGrp
 augroup END
 "
 
-set iskeyword=a-z,A-Z,_,.,39
-nnoremap <leader>k :set iskeyword=a-z,A-Z,_,39<CR>
-nnoremap <leader>j :set iskeyword=a-z,A-Z,_,.,39<CR>
 " Haskell Setup -------
 let g:haddock_browser="open"
 let g:haddock_browser_callformat="%s %s"
@@ -317,6 +314,7 @@ endfunction
 augroup rubyGrp
     au FileType ruby setlocal tabstop=2 softtabstop=2 shiftwidth=2
     au FileType ruby nnoremap <buffer> <localleader>cop :call RubocopAutocorrect()<cr>
+    au FileType ruby setlocal fdm=syntax
 augroup END
 
 "
