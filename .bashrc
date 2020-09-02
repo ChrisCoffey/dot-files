@@ -116,3 +116,36 @@ alias be="bundle exec"
 alias bo="BUNDLER_EDITOR=nvim bundler open "
 alias nuke="bundle exec rake db:drop db:create db:migrate "
 export PATH="/usr/local/opt/node@12/bin:$PATH"
+
+########################
+### ShUnit           ###
+########################
+export SHUNIT_HOME=~/workspace/open_source/shunit2
+
+########################
+### Helper Scripts   ###
+########################
+
+# Helper to recursively search for strings within files, perhaps with a specific extension.
+# I find myself running this all the time to track down function usages
+function rgrep {
+    if [ $# -ne 2 ]; then
+        echo "Requires at least two arguments"
+        return 1
+    elif  [ $# -gt 3 ]; then
+        echo "Too many arguments provided. Only supports 3."
+        return 1
+    fi
+
+    local term=$1
+    local path=$2
+    local file_extension=$3
+
+    if [ -z "$file_extension" ]; then
+        echo "bye"
+        grep -rn "$term" "$path"
+    else
+        echo "hi"
+        grep -rn "$term" --include="$file_extension" "$path"
+    fi
+}
