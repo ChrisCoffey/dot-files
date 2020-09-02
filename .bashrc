@@ -142,10 +142,8 @@ function rgrep {
     local file_extension=$3
 
     if [ -z "$file_extension" ]; then
-        echo "bye"
         grep -rn "$term" "$path"
     else
-        echo "hi"
         grep -rn "$term" --include="$file_extension" "$path"
     fi
 }
