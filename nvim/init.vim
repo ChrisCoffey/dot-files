@@ -18,7 +18,7 @@ Plug 'kien/ctrlp.vim'
 Plug 'tpope/vim-speeddating'
 Plug 'scrooloose/nerdtree'
 Plug 'mtth/scratch.vim'
-Plug 'shougo/deoplete.nvim'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'rizzatti/dash.vim'
 Plug 'junegunn/fzf'
 Plug 'altercation/vim-colors-solarized'
@@ -33,10 +33,7 @@ Plug 'autozimu/LanguageClient-neovim', {
 Plug 'junegunn/fzf'
 
 " Haskell
-Plug 'eagletmt/ghcmod-vim'
-" Plug 'eagletmt/neco-ghc'
-Plug 'bitc/vim-hdevtools'
-" Plug 'parsonsmatt/intero-neovim'
+Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
 
 " Purescript
 Plug 'frigoeu/psc-ide-vim'
@@ -84,7 +81,7 @@ set updatetime=250
 set spelllang=en_us
 set number numberwidth=2
 set tags=./.tags,.tags,./tags,tags;/
-set tabstop=4 softtabstop=4 expandtab shiftwidth=4 smarttab shiftround
+set tabstop=2 softtabstop=2 expandtab shiftwidth=2 smarttab shiftround
 set nowrap
 " set colorcolumn=100
 
@@ -183,7 +180,7 @@ let g:LanguageClient_serverStderr = '/tmp/LanguageServer.log'
 let g:LanguageClient_selectionUI = 'location-list'
 let g:LanguageClient_serverCommands = {
     \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-    \ 'haskell': ['~/.local/bin/hie-wrapper', '-r', curdir, '-d'],
+    \ 'haskell': ['ghcide', '-lsp'],
     \ 'javascript': ['javascript-typescript-langserver'],
     \ 'python': ['pyls'],
     \ 'elixir': ['~/workspace/open_source/elixir-ls/rel/language_server.sh'],
@@ -236,9 +233,6 @@ augroup parensGrp
 augroup END
 "
 
-set iskeyword=a-z,A-Z,_,.,39
-nnoremap <leader>k :set iskeyword=a-z,A-Z,_,39<CR>
-nnoremap <leader>j :set iskeyword=a-z,A-Z,_,.,39<CR>
 " Haskell Setup -------
 let g:haddock_browser="open"
 let g:haddock_browser_callformat="%s %s"
@@ -258,10 +252,10 @@ augroup haskellGrp
     au FileType haskell nnoremap <buffer> <localleader>ls :call LanguageClient#textDocument_documentSymbol()<CR>
 
     " Update my tags files
-    au BufWritePost *.hs silent !init-tags %
-    au BufWritePost *.hsc silent !init-tags %
+    "au BufWritePost *.hs silent !init-tags %
+    "au BufWritePost *.hsc silent !init-tags %
 
-    autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+    " autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
     " au BufWritePost *.hs :Neomake
 augroup END
 "
@@ -346,9 +340,6 @@ let g:deoplete#enable_at_startup = 1
 let g:deoplete#complete_method = "omnifunc"
 let g:deoplete#max_abbr_width=120
 let g:deoplete#max_menu_width=120
-if !exists('g:deoplete#omni#input_patterns')
-    let g:deoplete#omni#input_patterns = {}
-endif
 
 let startHour = strftime('%H')
 if (startHour > 7) && (startHour < 16)

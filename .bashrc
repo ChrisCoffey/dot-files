@@ -115,3 +115,9 @@ eval "$(rbenv init -)"
 alias be="bundle exec"
 alias bo="BUNDLER_EDITOR=nvim bundler open "
 alias nuke="bundle exec rake db:drop db:create db:migrate "
+
+#######################
+### Elixer          ###
+#######################
+export PATH="$HOME/.kiex/bin:$PATH"
+test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
