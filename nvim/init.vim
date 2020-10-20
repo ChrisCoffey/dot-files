@@ -311,6 +311,7 @@ endfunction
 augroup rubyGrp
     au FileType ruby setlocal tabstop=2 softtabstop=2 shiftwidth=2
     au FileType ruby nnoremap <buffer> <localleader>cop :call RubocopAutocorrect()<cr>
+    au FileType ruby setlocal fdm=syntax
 augroup END
 
 "
@@ -343,5 +344,6 @@ let g:deoplete#max_menu_width=120
 
 let startHour = strftime('%H')
 if (startHour > 7) && (startHour < 16)
+    :exec "set background=light"
     :exec "colorscheme solarized"
 endif

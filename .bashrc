@@ -4,8 +4,7 @@
 #
 ###########
 ulimit -n 4096
-export PS1="\W λ "
-export PS1="\W\[\033[32m\]\$(parse_git_branch)\[\033[00m\] λ "
+export PS1="\W \t \[\033[32m\]\033\$(parse_git_branch)\[\033[00m\] λ "
 
 alias ..="cd .."
 alias ...=".. && .."
@@ -34,6 +33,7 @@ alias szs="~/bin/bootScripts/scalazS.sh"
 alias genny="/Applications/Genymotion\ Shell.app/Contents/MacOS/gennyshell"
 alias rmorig='find ./ -name "*.orig" -delete'
 alias hdc='killall hdevtools'
+alias dpj='git checkout -- **/purs/package-lock.json'
 
 ##########################
 ### Haskell Aliases   ####
@@ -115,9 +115,44 @@ eval "$(rbenv init -)"
 alias be="bundle exec"
 alias bo="BUNDLER_EDITOR=nvim bundler open "
 alias nuke="bundle exec rake db:drop db:create db:migrate "
+export PATH="/usr/local/opt/node@12/bin:$PATH"
 
 #######################
 ### Elixer          ###
 #######################
 export PATH="$HOME/.kiex/bin:$PATH"
 test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
+
+
+########################
+### ShUnit           ###
+########################
+export SHUNIT_HOME=~/workspace/open_source/shunit2
+
+########################
+### Helper Scripts   ###
+########################
+
+# Helper to recursively search for strings within files, perhaps with a specific extension.
+# I find myself running this all the time to track down function usages
+function rgrep {
+    if [ $# -ne 2 ]; then
+        echo "Requires at least two arguments"
+        return 1
+    elif  [ $# -gt 3 ]; then
+        echo "Too many arguments provided. Only supports 3."
+        return 1
+    fi
+
+    local term=$1
+    local path=$2
+    local file_extension=$3
+
+    if [ -z "$file_extension" ]; then
+        echo "bye"
+        grep -rn "$term" "$path"
+    else
+        echo "hi"
+        grep -rn "$term" --include="$file_extension" "$path"
+    fi
+}
