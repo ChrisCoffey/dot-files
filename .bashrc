@@ -99,12 +99,12 @@ export CPPFLAGS="-I/usr/local/opt/llvm/include"
 ########################
 
 export PATH=$PATH:/bin/bootScripts/git/
-source ~/bin/bootScripts/git/gitFuncs.sh
+# source ~/bin/bootScripts/git/gitFuncs.sh
 export REVIEW_BASE=master # Used in some git aliases
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+#[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 ########################
 ### Ruby             ###
