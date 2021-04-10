@@ -4,7 +4,23 @@
 #
 ###########
 ulimit -n 4096
-export PS1="\W \t \[\033[32m\]\033\$(parse_git_branch)\[\033[00m\] λ "
+
+# Find and set branch name var if in git repository.
+function git_branch_name()
+{
+  branch=$(git symbolic-ref HEAD 2> /dev/null | awk 'BEGIN{FS="/"} {print $NF}')
+  if [[ $branch == "" ]];
+  then
+    :
+  else
+    echo '- ('$branch')'
+  fi
+}
+
+# Enable substitution in the prompt.
+setopt prompt_subst
+
+export PROMPT="%n %T $(git_branch_name) %d λ"
 
 alias ..="cd .."
 alias ...=".. && .."
