@@ -129,7 +129,7 @@ export SHUNIT_HOME=~/workspace/open_source/shunit2
 # Helper to recursively search for strings within files, perhaps with a specific extension.
 # I find myself running this all the time to track down function usages
 function rgrep {
-    if [ $# -ne 2 ]; then
+    if [ $# -lt 2 ]; then
         echo "Requires at least two arguments"
         return 1
     elif  [ $# -gt 3 ]; then
