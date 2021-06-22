@@ -18,7 +18,7 @@ Plug 'kien/ctrlp.vim'
 Plug 'tpope/vim-speeddating'
 Plug 'scrooloose/nerdtree'
 Plug 'mtth/scratch.vim'
-Plug 'shougo/deoplete.nvim'
+"Plug 'shougo/deoplete.nvim'
 Plug 'rizzatti/dash.vim'
 Plug 'junegunn/fzf'
 Plug 'altercation/vim-colors-solarized'
@@ -500,10 +500,10 @@ let g:fsharp_only_check_errors_on_write = 1
 
 
 "Register deoplete --------
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#complete_method = "omnifunc"
-let g:deoplete#max_abbr_width=120
-let g:deoplete#max_menu_width=120
+"let g:deoplete#enable_at_startup = 1
+"let g:deoplete#complete_method = "omnifunc"
+"let g:deoplete#max_abbr_width=120
+"let g:deoplete#max_menu_width=120
 
 :exec "colorscheme solarized"
 let startHour = strftime('%H')
