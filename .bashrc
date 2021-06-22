@@ -4,7 +4,23 @@
 #
 ###########
 ulimit -n 4096
-export PS1="\W \t \[\033[32m\]\033\$(parse_git_branch)\[\033[00m\] λ "
+
+# Find and set branch name var if in git repository.
+function git_branch_name()
+{
+  branch=$(git symbolic-ref HEAD 2> /dev/null | awk 'BEGIN{FS="/"} {print $NF}')
+  if [[ $branch == "" ]];
+  then
+    :
+  else
+    echo '- ('$branch')'
+  fi
+}
+
+# Enable substitution in the prompt.
+setopt prompt_subst
+
+export PROMPT="%n %T $(git_branch_name) %d λ"
 
 alias ..="cd .."
 alias ...=".. && .."
@@ -99,12 +115,12 @@ export CPPFLAGS="-I/usr/local/opt/llvm/include"
 ########################
 
 export PATH=$PATH:/bin/bootScripts/git/
-source ~/bin/bootScripts/git/gitFuncs.sh
+# source ~/bin/bootScripts/git/gitFuncs.sh
 export REVIEW_BASE=master # Used in some git aliases
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+#[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 ########################
 ### Ruby             ###
@@ -116,6 +132,13 @@ alias be="bundle exec"
 alias bo="BUNDLER_EDITOR=nvim bundler open "
 alias nuke="bundle exec rake db:drop db:create db:migrate "
 export PATH="/usr/local/opt/node@12/bin:$PATH"
+
+#######################
+### Elixer          ###
+#######################
+export PATH="$HOME/.kiex/bin:$PATH"
+test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
+
 
 ########################
 ### ShUnit           ###
