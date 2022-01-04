@@ -149,6 +149,9 @@ export SHUNIT_HOME=~/workspace/open_source/shunit2
 ### Helper Scripts   ###
 ########################
 
+# Hook direnv into the shell
+eval "$(direnv hook zsh)"
+
 # Helper to recursively search for strings within files, perhaps with a specific extension.
 # I find myself running this all the time to track down function usages
 function rgrep {

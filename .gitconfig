@@ -44,6 +44,7 @@
     reviewone = !nvim -p +\"tabdo :Gdiff $REVIEW_BASE\" +\"let g:gitgutter_diff_base = '$REVIEW_BASE'\"
 
     # Checkout master and rebase on remote
+    cm = !git checkout master
     gcrm = !git gcr master
     gcr = !git checkout $1 && git rebase -i origin/master
     po = !git push origin $(git rev-parse --abbrev-ref HEAD)

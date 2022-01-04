@@ -27,7 +27,7 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
     \ }
-" Plug 'w0rp/ale'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 
 " (Optional) Multi-entry selection UI.
 Plug 'junegunn/fzf'
@@ -37,8 +37,7 @@ Plug 'junegunn/fzf'
 
 
 " Purescript
-Plug 'frigoeu/psc-ide-vim'
-Plug 'raichoo/purescript-vim'
+Plug 'purescript-contrib/purescript-vim'
 
 " Scala
 Plug 'derekwyatt/vim-sbt'
@@ -178,7 +177,6 @@ let g:LanguageClient_serverCommands = {
     \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
     \ 'python': ['pyls'],
     \ 'elixir': ['~/workspace/open_source/elixir-ls/rel/language_server.sh'],
-    \ 'purescript': ['npx purescript-language-server --stdio'],
     \ 'ruby': ['tcp://localhost:7658']
     \ }
 
@@ -226,9 +224,6 @@ augroup END
 "
 
 " Purescript Setup ------
-let g:psc_ide_syntastic_mode= 1
-let g:psc_ide_log_level= 0
-let g:psc_ide_server_runner=["yarn", "--silent", "purs"]
 let g:purescript_indent_let = 0
 let g:purescript_indent_where = 0
 let g:purescript_indent_dot = 0
@@ -253,6 +248,7 @@ augroup javascriptGrp
     au FileType javascript setlocal tabstop=2 softtabstop=2 shiftwidth=2
     au FileType javascript.jsx setlocal tabstop=2 softtabstop=2 shiftwidth=2
 augroup END
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 augroup typescriptGrp
     autocmd!
@@ -284,7 +280,7 @@ augroup END
 " Markdown Setup -------
 augroup markdownGrp
     autocmd!
-    au FileType markdown set spell
+    au FileType markdown set spell wrap linebreak
     " au FileType markdown inoremap .. .\r
 augroup END
 "
@@ -300,7 +296,9 @@ augroup END
 " F# Setup ------------
 let g:fsharp_only_check_errors_on_write = 1
 
-" coc autocomplete config
+"
+" COC autocomplete config
+"
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
@@ -426,15 +424,56 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
-"Register deoplete --------
-"let g:deoplete#enable_at_startup = 1
-"let g:deoplete#complete_method = "omnifunc"
-"let g:deoplete#max_abbr_width=120
-"let g:deoplete#max_menu_width=120
 
+" Markdown preview
+" set to 1, nvim will open the preview window after entering the markdown buffer
+" default: 0
+let g:mkdp_auto_start = 0
+
+" set to 1, the nvim will auto close current preview window when change
+" from markdown buffer to another buffer
+" default: 1
+let g:mkdp_auto_close = 1
+
+" set to 1, the vim will refresh markdown when save the buffer or
+" leave from insert mode, default 0 is auto refresh markdown as you edit or
+" move the cursor
+" default: 0
+let g:mkdp_refresh_slow = 1
+
+" set to 1, preview server available to others in your network
+" by default, the server listens on localhost (127.0.0.1)
+" default: 0
+let g:mkdp_open_to_the_world = 0
+
+let g:mkdp_preview_options = {
+    \ 'mkit': {},
+    \ 'katex': {},
+    \ 'uml': {},
+    \ 'maid': {},
+    \ 'disable_sync_scroll': 0,
+    \ 'sync_scroll_type': 'middle',
+    \ 'hide_yaml_meta': 1,
+    \ 'sequence_diagrams': {},
+    \ 'flowchart_diagrams': {},
+    \ 'content_editable': v:false,
+    \ 'disable_filename': 0
+    \ }
+
+
+" preview page title
+" ${name} will be replace with the file name
+let g:mkdp_page_title = '「${name}」'
+
+" recognized filetypes
+" these filetypes will have MarkdownPreview... commands
+let g:mkdp_filetypes = ['markdown']
+
+
+
+:exec "colorscheme solarized"
 let startHour = strftime('%H')
 if (startHour > 7) && (startHour < 16)
     :exec "set background=light"
-    :exec "colorscheme solarized"
 endif
 
