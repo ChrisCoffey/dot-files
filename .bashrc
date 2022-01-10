@@ -173,3 +173,8 @@ function rgrep {
         grep -rn "$term" --include="$file_extension" "$path"
     fi
 }
+
+function mdToPDF {
+  base_file=$(echo "$1" | cut -f 1 -d ".")
+  pandoc --from=markdown --to=pdf "$base_file.md" > "$base_file.pdf"
+}
