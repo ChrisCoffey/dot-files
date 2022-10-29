@@ -119,7 +119,7 @@ export PATH=$PATH:/bin/bootScripts/git/
 export REVIEW_BASE=master # Used in some git aliases
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 #[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 ########################
@@ -131,7 +131,6 @@ eval "$(rbenv init -)"
 alias be="bundle exec"
 alias bo="BUNDLER_EDITOR=nvim bundler open "
 alias nuke="bundle exec rake db:drop db:create db:migrate "
-export PATH="/usr/local/opt/node@12/bin:$PATH"
 
 #######################
 ### Elixer          ###
