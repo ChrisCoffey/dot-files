@@ -88,7 +88,7 @@ export SCALA_HOME="/bin/scala_current"
 export JAVA_HOME=$(/usr/libexec/java_home -v 1.8.0_05)
 export JAVA_OPTIONS="-Xms64m -Xmx4G -Xss2m -XX:MaxPermSize=2G"
 export SBT_OPTS="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=9999"
-export GEM_HOME=/usr/local/bin/ruby/2.0.0/gems/
+# export GEM_HOME=/usr/local/bin/ruby/2.0.0/gems/
 export RABBIT_HOME=/usr/local/Cellar/rabbitmq/3.6.6/sbin
 export NVM_HOME="$HOME/.nvm"
 

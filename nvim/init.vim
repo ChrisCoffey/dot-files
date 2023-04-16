@@ -480,6 +480,23 @@ let g:mkdp_page_title = '「${name}」'
 " these filetypes will have MarkdownPreview... commands
 let g:mkdp_filetypes = ['markdown']
 
+function! GrepWordUnderCursor()
+    " Save the current word under the cursor
+    let current_word = expand('<cword>')
+
+    " Get the file extension of the current buffer
+    let current_ext = expand('%:e')
+
+    " Use grep to search for the word in files with the same extension, and populate the quickfix list
+    execute 'grep -rn --include="*.' . current_ext . '" ' . shellescape(current_word) . ' .'
+
+    " Open the quickfix window to display the results
+    copen
+endfunction
+
+" Optional: create a mapping to call the function, for example with <leader>g
+nnoremap <leader>g :call GrepWordUnderCursor()<CR>
+
 
 
 :exec "colorscheme solarized"
@@ -487,4 +504,3 @@ let startHour = strftime('%H')
 if (startHour > 7) && (startHour < 16)
     :exec "set background=light"
 endif
-
