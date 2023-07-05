@@ -1,4 +1,6 @@
 set mouse=a
+
+let g:python3_host_prog = '/opt/homebrew/bin/python3'
 " Plug Init -----
 call plug#begin()
 let curdir = getcwd()
@@ -10,7 +12,7 @@ Plug 'gregsexton/MatchTag'
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-surround'
-Plug 'airblade/vim-gitgutter'
+" Plug 'airblade/vim-gitgutter'
 Plug 'Shougo/vimproc.vim'
 Plug 'jceb/vim-orgmode'
 Plug 'kien/ctrlp.vim'
@@ -22,6 +24,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'rizzatti/dash.vim'
 Plug 'junegunn/fzf'
 Plug 'altercation/vim-colors-solarized'
+Plug 'overcache/NeoSolarized'
 Plug 'elixir-editors/vim-elixir'
 Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
@@ -165,7 +168,6 @@ let g:syntastic_ruby_checkers = ['bundle exec rubocop', 'bundle exec mri']
 set hidden
 " let g:ale_elixir_elixir_ls_release = '/Users/chriscoffey/workspace/open_source/elixir-ls/rel'
 
-let g:LanguageClient_devel = 0
 let g:LanguageClient_loggingFile = '/tmp/LanguageClient.log'
 let g:LanguageClient_loggingLevel = 'INFO'
 let g:LanguageClient_serverStderr = '/tmp/LanguageServer.log'
@@ -205,7 +207,6 @@ augroup END
 " Rainbow Parens -------
 augroup parensGrp
     autocmd!
-    au VimEnter * RainbowParenthesesToggle
     au Syntax * RainbowParenthesesLoadRound
     au Syntax * RainbowParenthesesLoadSquare
     au Syntax * RainbowParenthesesLoadBraces
@@ -498,8 +499,9 @@ endfunction
 nnoremap <leader>g :call GrepWordUnderCursor()<CR>
 
 
-
-:exec "colorscheme solarized"
+set termguicolors
+set background=dark
+colorscheme NeoSolarized
 let startHour = strftime('%H')
 if (startHour > 7) && (startHour < 16)
     :exec "set background=light"
