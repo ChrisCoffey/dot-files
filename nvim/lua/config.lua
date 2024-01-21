@@ -11,7 +11,7 @@ require("mason").setup({
 )
 require("mason-lspconfig").setup{
   ensure_installed = {
-    'awkls',
+    'awk_ls',
     'bashls',
     'clangd',
     'lua_ls',
@@ -20,8 +20,10 @@ require("mason-lspconfig").setup{
     'jedi_language_server',
     'purescriptls',
     'tsserver',
-    'r_language_server',
-    'solargraph'
+    'r_language_server'
+    --'sorbet'
+    --'solargraph'
+    -- 'ruby_ls'
   }
 }
 require("lspconfig").lua_ls.setup {}
@@ -30,7 +32,59 @@ require("lspconfig").hls.setup {}
 require("lspconfig").purescriptls.setup {}
 require("lspconfig").tsserver.setup {}
 require("lspconfig").bashls.setup {}
-require("lspconfig").solargraph.setup {}
+-- require("lspconfig").sorbet.setup {}
+--require("lspconfig").solargraph.setup {
+--    cmd = {"bundle", "exec", "solargraph", "stdio" }
+--}
+
+
+------------------
+--
+-- Nvim pull diagnostics hack
+--
+------------------
+
+_timers = {}
+local function setup_diagnostics(client, buffer)
+  if require("vim.lsp.diagnostic")._enable then
+    return
+  end
+
+  local diagnostic_handler = function()
+    local params = vim.lsp.util.make_text_document_params(buffer)
+    client.request("textDocument/diagnostic", { textDocument = params }, function(err, result)
+      if err then
+        local err_msg = string.format("diagnostics error - %s", vim.inspect(err))
+        vim.lsp.log.error(err_msg)
+      end
+      local diagnostic_items = {}
+      if result then
+        diagnostic_items = result.items
+      end
+      vim.lsp.diagnostic.on_publish_diagnostics(
+        nil,
+        vim.tbl_extend("keep", params, { diagnostics = diagnostic_items }),
+        { client_id = client.id }
+      )
+    end)
+  end
+
+  diagnostic_handler() -- to request diagnostics on buffer when first attaching
+
+  vim.api.nvim_buf_attach(buffer, false, {
+    on_lines = function()
+      if _timers[buffer] then
+        vim.fn.timer_stop(_timers[buffer])
+      end
+      _timers[buffer] = vim.fn.timer_start(200, diagnostic_handler)
+    end,
+    on_detach = function()
+      if _timers[buffer] then
+        vim.fn.timer_stop(_timers[buffer])
+      end
+    end,
+  })
+end
 
 
 
@@ -164,3 +218,6 @@ cmp.setup({
   },
 })
 
+
+-- Copilot plugin setup
+vim.api.nvim_set_keymap('v', 'cp', ':Copilot panel<CR>', {noremap = true, silent = true })

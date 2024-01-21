@@ -27,6 +27,7 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'overcache/NeoSolarized'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 Plug 'kien/rainbow_parentheses.vim'
+Plug 'github/copilot.vim', {'branch': 'release'}
 
 " LSP stuff
 Plug 'williamboman/mason.nvim'
@@ -119,7 +120,6 @@ set statusline+=\ col:\ %c,
 
 
 
-"
 
 " Meta mappings -------
 nnoremap <leader>sv :source $MYVIMRC<cr>
@@ -151,7 +151,7 @@ onoremap sb i[
 onoremap n i<
 
 "Formatting
-com! FormatJSON %!python -m json.tool
+com! FormatJSON %!python3 -m json.tool
 
 func! DeleteTrailingWS()
   exe "normal mz"

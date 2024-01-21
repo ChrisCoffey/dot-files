@@ -30,6 +30,7 @@ alias ws="cd ~/workspace"
 alias wsp="cd ~/workspace/personal"
 alias wso="cd ~/workspace/open_source"
 alias wsv="cd ~/.local/share/nvim/plugged"
+alias wscv="cd ~/workspace/college_vine"
 alias rmorig='find ./ -name "*.orig" -delete'
 
 ##########################
@@ -65,10 +66,12 @@ export PATH=$PATH:/bin/s3cmd-1.5.0-rc1
 export PATH=~/.local/bin:$PATH
 
 ## Ensure programs installed by brew are given preference, unless otherwise specified
-export PATH=/usr/local/bin:$PATH
+export PATH=/opt/homebrew:$PATH
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 export LDFLAGS="-L/usr/local/opt/llvm/lib"
 export CPPFLAGS="-I/usr/local/opt/llvm/include"
+export LDFLAGS="-L/usr/local/opt/llvm/lib:$LDFLAGS"
 
 ########################
 ### Git              ###
@@ -142,4 +145,6 @@ function mdToPDF {
 }
 
 . "$HOME/.ghcup/env"
-. "$HOME/.cargo/env"
+# . "$HOME/.cargo/env"
+
+nvm use v16.15.0

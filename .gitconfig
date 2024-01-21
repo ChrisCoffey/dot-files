@@ -19,7 +19,7 @@
 [push]
 	default = simple
 [core]
-	editor = /usr/local/bin/nvim
+	editor = /opt/homebrew/bin/nvim
 [alias]
     last = log -l HEAD
     unstage = checkout -- .
