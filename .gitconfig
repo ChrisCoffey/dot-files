@@ -1,6 +1,6 @@
 [user]
 	name = Chris Coffey
-	email = cmcof273@gmail.com
+	email = chris@collegevine.com
 
 [difftool "kdiff3"]
     path = /Applications/kdiff3.app/Contents/MacOS/kdiff3
@@ -61,3 +61,5 @@
 	required = true
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
+[init]
+	defaultBranch = main

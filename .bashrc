@@ -67,11 +67,11 @@ export PATH=~/.local/bin:$PATH
 
 ## Ensure programs installed by brew are given preference, unless otherwise specified
 export PATH=/opt/homebrew:$PATH
+export PATH="/usr/local/opt/libpq/bin:$PATH"
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
-export LDFLAGS="-L/usr/local/opt/llvm/lib"
-export CPPFLAGS="-I/usr/local/opt/llvm/include"
-export LDFLAGS="-L/usr/local/opt/llvm/lib:$LDFLAGS"
+#export LDFLAGS="-L/usr/local/opt/llvm/lib"
+#export CPPFLAGS="-I/usr/local/opt/llvm/include"
 
 ########################
 ### Git              ###
@@ -85,8 +85,13 @@ export REVIEW_BASE=master # Used in some git aliases
 ### Node             ###
 ########################
 export NVM_DIR="$HOME/.nvm"
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+
+
+#export NVM_DIR="$HOME/.nvm"
+#[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+#[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 
 ########################
@@ -146,5 +151,10 @@ function mdToPDF {
 
 . "$HOME/.ghcup/env"
 # . "$HOME/.cargo/env"
+
+# pyenv setup
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
 
 nvm use v16.15.0
