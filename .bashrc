@@ -157,4 +157,9 @@ export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
-nvm use v20.18.1
+##################
+### Agents     ###
+##################
+source ~/.config/open_ai_codex_key
+
+nvm use v22

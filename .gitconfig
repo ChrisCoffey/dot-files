@@ -8,14 +8,14 @@
 [difftool]
     prompt = false
 [diff]
-    tool = kdiff3
+	tool = bc
 [mergetool "kdiff3"]
     path = /Applications/kdiff3.app/Contents/MacOS/kdiff3
     trustExitCode = false
 [mergetool]
     keepBackup = false
 [merge]
-    tool = kdiff3
+	tool = bc
 [push]
 	default = simple
 [core]
@@ -63,3 +63,5 @@
 	smudge = git-lfs smudge -- %f
 [init]
 	defaultBranch = main
+[mergetool "bc"]
+	trustExitCode = true
